@@ -1,31 +1,11 @@
 const API_KEY = "561db5a909804abab0aa80a5158a6cd1"
 
 class NewsApi {
-    constructor() {
+    constructor(path, method, body) {
         this.token = API_KEY
-        this.baseUrl = "https://newsapi.org/v2/"
-    }
-
-    async send(path, method, body) {
-        const options = this.createOptions(method)
-
-        const params = body ? this.createParams(body) : ""
-
-        const res = await fetch(this.baseUrl + path + params, options)
-        let data
-
-        const contentType = res.headers.get("content-type")
-
-        if (contentType?.startsWith("application/json"))
-            data = await res.json();
-        else
-            data = await res.text();
-
-        return {
-            status: res.ok,
-            message: res.ok ? "ok" : data.message || data.detail,
-            data
-        }
+        this.baseUrl = `https://newsapi.org/v2/${path}`
+        this.options = this.createOptions(method)
+        this.changeFullUrl(body)
     }
 
     createOptions(method) {
@@ -40,12 +20,25 @@ class NewsApi {
         return options
     }
 
-    createParams(body) {
+    changeFullUrl(body) {
+        this.fullUrl =  this.baseUrl + this.createFullPath(body)
+    }
+
+    createFullPath(body) {
+        if (!body)
+            return ""
+
         let path = "?"
         let count = 0
         for (const param in body) {
+            if (body[param] === "") {
+                count++
+                continue
+            }
+
             path += `${param}=${body[param]}`
-            if (count < body.length - 1)
+
+            if (count < Object.keys(body).length - 1)
                 path += `&`
 
             count++
