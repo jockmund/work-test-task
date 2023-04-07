@@ -22,6 +22,10 @@ module.exports = {
         topLevelAwait: true
     },
 
+    resolve: {
+        modules: ['node_modules']
+    },
+
     module: {
         rules: [
             {
@@ -29,8 +33,22 @@ module.exports = {
                 use: 'babel-loader'
             },
             {
-                test: /\.html$/,
+                test: /\.html$/i,
                 use: "html-loader",
+            },
+            {
+                test: /\.css$/i,
+                include: path.resolve(__dirname, 'src'),
+                use: ['style-loader', 'css-loader', 'postcss-loader'],
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                include: path.resolve(__dirname, 'src'),
+                use: [
+                    {
+                        loader: 'file-loader',
+                    },
+                ],
             },
         ]
     },

@@ -1,19 +1,24 @@
 <!doctype html>
-<html lang="en" ng-app>
+<html lang="en" >
 <head>
     <meta charset="utf-8">
     <title>News feed</title>
-
-    <script defer src="main.bundle.js"></script>
-</head>
+<script defer src="main.bundle.js"></script></head>
 
 <body>
-<script src="../../node_modules/angular/angular.js"></script>
-<div>
-    <input type="text" ng-model="name" placeholder="Введите имя">
 
-    <h1>Добро пожаловать {{name}}!</h1>
+<div ng-app = "newsFeedApp" class="mx-5 mt-5">
+    <div class="flex border-2">
+        <div class="flex w-48 p-6 hover:shadow-lg hover:bg-cyan-100/50 hover:border-solid">
+            <a href="#!/newsTopHeadlines">Top Headlines</a>
+        </div>
+        <div class="flex w-48 p-6 text-center hover:shadow-lg hover:bg-cyan-100/50 hover:border-solid">
+            <a href="#!/newsEverything">Everything</a>
+        </div>
+    </div>
+    <div ng-view></div>
 </div>
+
 
 </body>
 </html>
