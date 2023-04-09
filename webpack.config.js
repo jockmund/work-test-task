@@ -29,7 +29,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js)$/,
+                test: /\.(js)$/i,
                 use: 'babel-loader'
             },
             {
@@ -38,17 +38,11 @@ module.exports = {
             },
             {
                 test: /\.css$/i,
-                include: path.resolve(__dirname, 'src'),
                 use: ['style-loader', 'css-loader', 'postcss-loader'],
             },
             {
                 test: /\.(png|jpe?g|gif)$/i,
-                include: path.resolve(__dirname, 'src'),
-                use: [
-                    {
-                        loader: 'file-loader',
-                    },
-                ],
+                use: 'file-loader',
             },
         ]
     },

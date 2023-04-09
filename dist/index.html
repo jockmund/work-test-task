@@ -1,22 +1,18 @@
 <!doctype html>
-<html lang="en" >
+<html lang="en">
 <head>
+    <base href="/">
     <meta charset="utf-8">
-    <title>News feed</title>
+    <link rel="stylesheet" href="#" type="text/html" >
+    <title>News Feed</title>
 <script defer src="main.bundle.js"></script></head>
 
 <body>
+<nav>
 
-<div ng-app = "newsFeedApp" class="mx-5 mt-5">
-    <div class="flex border-2">
-        <div class="flex w-48 p-6 hover:shadow-lg hover:bg-cyan-100/50 hover:border-solid">
-            <a href="#!/newsTopHeadlines">Top Headlines</a>
-        </div>
-        <div class="flex w-48 p-6 text-center hover:shadow-lg hover:bg-cyan-100/50 hover:border-solid">
-            <a href="#!/newsEverything">Everything</a>
-        </div>
-    </div>
-    <div ng-view></div>
+</nav>
+<div ng-app="newsFeedApp" class="mx-5 mt-5">
+    <news-feed-app></news-feed-app>
 </div>
 
 

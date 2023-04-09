@@ -1,3 +1,3 @@
 angular.module("newsList", [
-
+    "newsDetail"
 ])

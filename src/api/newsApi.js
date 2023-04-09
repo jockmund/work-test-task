@@ -1,11 +1,11 @@
 const API_KEY = "8b849834da304a37bdafd5155f1bff1a"
 
 class NewsApi {
-    constructor(path, method, body) {
+    constructor() {
         this.token = API_KEY
-        this.baseUrl = `https://newsapi.org/v2/${path}`
-        this.options = this.createOptions(method)
-        this.changeFullUrl(body)
+        this.baseUrl = `https://newsapi.org/v2/`
+        this.options = this.createOptions("GET")
+        this.fullUrl = ""
     }
 
     createOptions(method) {
@@ -20,8 +20,8 @@ class NewsApi {
         return options
     }
 
-    changeFullUrl(body) {
-        this.fullUrl =  this.baseUrl + this.createFullPath(body)
+    changeFullUrl(path, body) {
+        this.fullUrl = this.baseUrl + path + this.createFullPath(body)
     }
 
     createFullPath(body) {
