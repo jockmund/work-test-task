@@ -29,10 +29,6 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js)$/i,
-                use: 'babel-loader'
-            },
-            {
                 test: /\.html$/i,
                 use: "html-loader",
             },

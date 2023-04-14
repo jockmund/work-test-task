@@ -1,4 +1,4 @@
-const API_KEY = "8b849834da304a37bdafd5155f1bff1a"
+const API_KEY = "d5c179e47e4741faa2d615aa7318cc5f"
 
 class NewsApi {
     constructor() {

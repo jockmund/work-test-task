@@ -2,7 +2,7 @@ import NewsApi from "../../../api/newsApi";
 
 angular
     .module("core.news")
-    .factory('News', function ($http, $resource) {
+    .factory('News', function ($resource) {
         const newsApi = new NewsApi()
 
         return function getNews(path, body) {
@@ -14,17 +14,6 @@ angular
                     newsApi.changeFullUrl(path, body)
                     break
             }
-
-            // return $http.get(newsApi.fullUrl, newsApi.options)
-            //     .then(function (response) {
-            //         if (response.data.status) {
-            //             return response.data["articles"]
-            //         }
-            //     }).then(function (data) {
-            //         return data
-            //     }).catch(err => {
-            //
-            //     })
 
             return $resource(newsApi.fullUrl, {}, {
                 get: {
