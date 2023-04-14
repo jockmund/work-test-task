@@ -1,5 +1,3 @@
-// require("../../../../public/No-Image-Placeholder.png")
-
 angular.module('newsDetail').component('newsDetail', {
     template: `<li class=" flex flex-col border border-b-gray-400 m-8 rounded-lg">       
                     <div class="bg-slate-500/50 min-h-12 content-center rounded-t-lg p-3 pl-10 text-xl font-medium">
@@ -17,19 +15,18 @@ angular.module('newsDetail').component('newsDetail', {
         const self = this
         this.imageUrl = ""
 
+        /**
+         * Проверяем корректность ссылки на фотографию для текущей новости
+         * @param obj
+         */
         this.$onChanges = function (obj) {
             this.checkImgUrl = function () {
                 if (obj.news.currentValue.urlToImage === null) {
                     self.imageUrl = "https://aisol.org/img/no-image.png"
-                    return
-                }
 
-                $http.get(obj.news.currentValue.urlToImage, {method: 'HEAD', mode: 'no-cors'}).then(function() {
+                } else {
                     self.imageUrl = obj.news.currentValue.urlToImage
-                })
-                    .catch(function() {
-                        self.imageUrl = "https://aisol.org/img/no-image.png"
-                    })
+                }
             }
 
             this.checkImgUrl()

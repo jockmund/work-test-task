@@ -12,6 +12,10 @@ angular.module("pagination").component("pagination", {
 
         const self = this
 
+        /**
+         * При изменении списка новостей на новый с другими параметрами, создаем новый массив с элементами пагинации
+         * @param changesObj
+         */
         this.$onChanges = function (changesObj) {
             if ("arrayLength" in changesObj && this.isPageChange) {
                 this.curPage = 1
@@ -20,6 +24,10 @@ angular.module("pagination").component("pagination", {
             }
         }
 
+        /**
+         * Создаем массив с элементами пагинации для определенного количества страниц
+         * @returns {string[]} - Массив с элементами пагинации
+         */
         this.createArray = function () {
             const length = this.arrayLength
             let resArray = ["<<", "<"]
@@ -37,6 +45,10 @@ angular.module("pagination").component("pagination", {
             return resArray
         }
 
+        /**
+         * Изменяем элементы массива пагинации
+         * @param type - Знак + или -, в зависимости от которого значения будут либо уменьшаться, либо увеличиваться на единицу
+         */
         this.changeArray = function (type) {
             if (this.arrayLength / this.pageSize < this.maxPagesToShow / 2 + 1)
                 return
@@ -60,6 +72,10 @@ angular.module("pagination").component("pagination", {
             }
         }
 
+        /**
+         * Определяем какая кнопка была нажата и в соответствии с этим изменяем массив с элементами пагинации
+         * @param btn - Нажатая кнопка в пагинации
+         */
         this.clickBtn = function (btn) {
             let resPage
             switch (btn) {

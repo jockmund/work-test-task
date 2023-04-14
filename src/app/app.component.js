@@ -36,7 +36,12 @@ angular.module('newsFeedApp')
 
             const self = this
 
+            /**
+             * Вешаем обработчик событий на переход между роутами
+             */
             $rootScope.$on('$routeChangeStart', function (event, current) {
+                if (current.$$route === undefined)
+                    return
 
                 const curPath = current.$$route.originalPath
 
@@ -49,6 +54,11 @@ angular.module('newsFeedApp')
                 }
             })
 
+            /**
+             * Отправление запроса на сервер и изменение данных в зависимости от результата
+             * @param type - Тип новостей: Everything или Top-headlines
+             * @param params - Параметры для запроса новостей с сервера
+             */
             this.changeNews = function (type, params) {
                 this.curPageType = type
 
@@ -56,6 +66,8 @@ angular.module('newsFeedApp')
                     this.curPage = 1
                     this.curParams = params
                     this.isPageChange = true
+                    this.news = undefined
+                    this.isPagination = false
                 }
 
                 const body = {
@@ -71,6 +83,10 @@ angular.module('newsFeedApp')
                 })
             }
 
+            /**
+             * Изменение текущих новостей в зависимости от номера страницы
+             * @param number - Номер страницы
+             */
             this.changePage = function (number) {
                 this.curPage = number
                 this.changeNews(this.curPageType, this.curParams)

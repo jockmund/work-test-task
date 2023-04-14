@@ -39,6 +39,288 @@ eval("/**\n * @license AngularJS v1.8.2\n * (c) 2010-2020 Google LLC. http://ang
 
 /***/ }),
 
+/***/ "./src/api/newsApi.js":
+/*!****************************!*\
+  !*** ./src/api/newsApi.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nfunction _typeof(obj) { \"@babel/helpers - typeof\"; return _typeof = \"function\" == typeof Symbol && \"symbol\" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && \"function\" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; }, _typeof(obj); }\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, \"prototype\", { writable: false }); return Constructor; }\nfunction _toPropertyKey(arg) { var key = _toPrimitive(arg, \"string\"); return _typeof(key) === \"symbol\" ? key : String(key); }\nfunction _toPrimitive(input, hint) { if (_typeof(input) !== \"object\" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || \"default\"); if (_typeof(res) !== \"object\") return res; throw new TypeError(\"@@toPrimitive must return a primitive value.\"); } return (hint === \"string\" ? String : Number)(input); }\nvar API_KEY = \"d5c179e47e4741faa2d615aa7318cc5f\";\nvar NewsApi = /*#__PURE__*/function () {\n  function NewsApi() {\n    _classCallCheck(this, NewsApi);\n    this.token = API_KEY;\n    this.baseUrl = \"https://newsapi.org/v2/\";\n    this.options = this.createOptions(\"GET\");\n    this.fullUrl = \"\";\n  }\n\n  /**\n   * Создаем опции для запроса на сервер, включая токен авторизации\n   * @param method - Метод\n   * @returns {{headers: {Authorization: string, accept: string}, method}}\n   */\n  _createClass(NewsApi, [{\n    key: \"createOptions\",\n    value: function createOptions(method) {\n      var options = {\n        method: method,\n        headers: {\n          accept: \"application/json\",\n          \"Authorization\": \"Bearer \".concat(this.token)\n        }\n      };\n      return options;\n    }\n\n    /**\n     * Генерируем полный url, на основе переданных параметров\n     * @param path - Тип страницы новостей, а именно everything или top-headlines\n     * @param body - Параметры запроса\n     */\n  }, {\n    key: \"changeFullUrl\",\n    value: function changeFullUrl(path, body) {\n      this.fullUrl = this.baseUrl + path + this.createParamsPath(body);\n    }\n\n    /**\n     * Генерируем часть url, содержащую параметры\n     * @param body - Параметры запроса\n     * @returns {string}\n     */\n  }, {\n    key: \"createParamsPath\",\n    value: function createParamsPath(body) {\n      if (!body) return \"\";\n      var path = \"?\";\n      var count = 0;\n      for (var param in body) {\n        if (body[param] === \"\") {\n          count++;\n          continue;\n        }\n        path += \"\".concat(param, \"=\").concat(body[param]);\n        if (count < Object.keys(body).length - 1) path += \"&\";\n        count++;\n      }\n      return path;\n    }\n  }]);\n  return NewsApi;\n}();\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NewsApi);\n\n//# sourceURL=webpack://work-test-task/./src/api/newsApi.js?");
+
+/***/ }),
+
+/***/ "./src/app/app.component.js":
+/*!**********************************!*\
+  !*** ./src/app/app.component.js ***!
+  \**********************************/
+/***/ (() => {
+
+eval("function _typeof(obj) { \"@babel/helpers - typeof\"; return _typeof = \"function\" == typeof Symbol && \"symbol\" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && \"function\" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; }, _typeof(obj); }\nfunction ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }\nfunction _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }\nfunction _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\nfunction _toPropertyKey(arg) { var key = _toPrimitive(arg, \"string\"); return _typeof(key) === \"symbol\" ? key : String(key); }\nfunction _toPrimitive(input, hint) { if (_typeof(input) !== \"object\" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || \"default\"); if (_typeof(res) !== \"object\") return res; throw new TypeError(\"@@toPrimitive must return a primitive value.\"); } return (hint === \"string\" ? String : Number)(input); }\nangular.module('newsFeedApp').config(['$routeProvider', function config($routeProvider) {\n  $routeProvider.when('/newsTopHeadlines', {\n    template: \"<news-top-headlines news=\\\"$ctrl.news\\\" filter-news=\\\"$ctrl.changeNews(type, params)\\\"></news-top-headlines>\"\n  }).when('/newsEverything', {\n    template: \"<news-everything  news=\\\"$ctrl.news\\\" search-news=\\\"$ctrl.changeNews(type, params)\\\"></news-everything>\"\n  }).otherwise('/newsTopHeadlines');\n}]).component('newsFeedApp', {\n  template: \"<div class=\\\"mx-5 mt-5\\\">\\n                        <div class=\\\"flex border-2\\\">\\n                            <div ng-class=\\\"{'bg-cyan-100/50 border-4': $ctrl.isTopHeadlines}\\\" class=\\\"h-32 w-64 text-center hover:shadow-lg hover:bg-cyan-100/50 hover:border-solid text-xl\\\">\\n                                <a class=\\\"py-12 block h-full\\\" href=\\\"#!/newsTopHeadlines\\\">Top Headlines</a>\\n                            </div>\\n                            <div ng-class=\\\"{'bg-cyan-100/50 border-4': $ctrl.isEverything}\\\" class=\\\"h-32 w-64 text-center align-middle hover:shadow-lg hover:bg-cyan-100/50 hover:border-solid text-xl\\\">\\n                                <a class=\\\"py-12 block h-full\\\" href=\\\"#!/newsEverything\\\">Everything</a>\\n                            </div>\\n                        </div>\\n                        <div ng-view></div>\\n                        <div ng-if=\\\"$ctrl.isPagination\\\">\\n                            <pagination on-click=\\\"$ctrl.changePage(number)\\\" array-length=\\\"$ctrl.totalResults\\\" is-page-change=\\\"$ctrl.isPageChange\\\"></pagination>\\n                        </div>\\n                    </div>\",\n  controller: function NewsFeedAppController($rootScope, News) {\n    this.$onInit = function () {\n      this.pageSize = 5;\n      this.curPage = 1;\n      this.curPageType = \"\";\n      this.curParams = {};\n      this.totalResults = 0;\n      this.isPagination = false;\n      this.isPageChange = false;\n    };\n    var self = this;\n\n    /**\n     * Вешаем обработчик событий на переход между роутами\n     */\n    $rootScope.$on('$routeChangeStart', function (event, current) {\n      if (current.$$route === undefined) return;\n      var curPath = current.$$route.originalPath;\n      if (curPath === \"/newsTopHeadlines\") {\n        self.isTopHeadlines = true;\n        self.isEverything = false;\n      } else {\n        self.isTopHeadlines = false;\n        self.isEverything = true;\n      }\n    });\n\n    /**\n     * Отправление запроса на сервер и изменение данных в зависимости от результата\n     * @param type - Тип новостей: Everything или Top-headlines\n     * @param params - Параметры для запроса новостей с сервера\n     */\n    this.changeNews = function (type, params) {\n      this.curPageType = type;\n      if (JSON.stringify(this.curParams) !== JSON.stringify(params)) {\n        this.curPage = 1;\n        this.curParams = params;\n        this.isPageChange = true;\n      }\n      var body = _objectSpread({\n        pageSize: this.pageSize,\n        page: this.curPage\n      }, params);\n      News(type, body).get(function (data) {\n        self.news = data[\"articles\"];\n        self.totalResults = data[\"totalResults\"];\n        self.isPagination = self.totalResults !== 0;\n      });\n    };\n\n    /**\n     * Изменение текущих новостей в зависимости от номера страницы\n     * @param number - Номер страницы\n     */\n    this.changePage = function (number) {\n      this.curPage = number;\n      this.changeNews(this.curPageType, this.curParams);\n      setTimeout(function () {\n        return window.scrollBy(0, -10000);\n      }, 500);\n    };\n  }\n});\n\n//# sourceURL=webpack://work-test-task/./src/app/app.component.js?");
+
+/***/ }),
+
+/***/ "./src/app/app.module.js":
+/*!*******************************!*\
+  !*** ./src/app/app.module.js ***!
+  \*******************************/
+/***/ (() => {
+
+eval("angular.module('newsFeedApp', ['ngRoute', 'newsEverything', 'newsTopHeadlines', 'pagination', 'core.news']);\n\n//# sourceURL=webpack://work-test-task/./src/app/app.module.js?");
+
+/***/ }),
+
+/***/ "./src/app/core/news/news.module.js":
+/*!******************************************!*\
+  !*** ./src/app/core/news/news.module.js ***!
+  \******************************************/
+/***/ (() => {
+
+eval("angular.module(\"core.news\", ['ngResource']);\n\n//# sourceURL=webpack://work-test-task/./src/app/core/news/news.module.js?");
+
+/***/ }),
+
+/***/ "./src/app/core/news/news.service.js":
+/*!*******************************************!*\
+  !*** ./src/app/core/news/news.service.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _api_newsApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../api/newsApi */ \"./src/api/newsApi.js\");\n\nangular.module(\"core.news\").factory('News', function ($resource) {\n  var newsApi = new _api_newsApi__WEBPACK_IMPORTED_MODULE_0__[\"default\"]();\n  return function getNews(path, body) {\n    switch (path) {\n      case \"everything\":\n        newsApi.changeFullUrl(path, body);\n        break;\n      case \"top-headlines\":\n        newsApi.changeFullUrl(path, body);\n        break;\n    }\n    return $resource(newsApi.fullUrl, {}, {\n      get: {\n        method: \"GET\",\n        headers: newsApi.options.headers\n      }\n    });\n  };\n});\n\n//# sourceURL=webpack://work-test-task/./src/app/core/news/news.service.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/news-everything/news-everything.component.js":
+/*!*******************************************************************!*\
+  !*** ./src/app/news/news-everything/news-everything.component.js ***!
+  \*******************************************************************/
+/***/ (() => {
+
+eval("angular.module('newsEverything').component('newsEverything', {\n  template: \"<div>\\n                    <div class=\\\"m-5 text-4xl \\\">Everything</div>\\n                    <search-line on-search=\\\"$ctrl.clickSearch(query)\\\"></search-line>\\n                    <news-list news-list=\\\"$ctrl.news\\\"></news-list>\\n                </div>\",\n  controller: function NewsEverythingController() {\n    var self = this;\n\n    /**\n     * Иницализируем текущие новости для параметра q: today\n     */\n    this.$onInit = function () {\n      this.type = \"everything\";\n      var params = {\n        q: \"today\"\n      };\n      this.searchNews({\n        type: this.type,\n        params: params\n      });\n    };\n\n    /**\n     * Вызываем событие родительского элемента с обновлением ноовостей\n     * @param query - Строка с введенной новостью для параметра запроса\n     */\n    this.clickSearch = function (query) {\n      var params = {\n        q: query\n      };\n      this.searchNews({\n        type: this.type,\n        params: params\n      });\n    };\n  },\n  bindings: {\n    news: \"<\",\n    searchNews: \"&\"\n  }\n});\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-everything/news-everything.component.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/news-everything/news-everything.module.js":
+/*!****************************************************************!*\
+  !*** ./src/app/news/news-everything/news-everything.module.js ***!
+  \****************************************************************/
+/***/ (() => {
+
+eval("angular.module('newsEverything', ['ngRoute', 'newsList', 'searchLine']);\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-everything/news-everything.module.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/news-everything/search-line/search-line.component.js":
+/*!***************************************************************************!*\
+  !*** ./src/app/news/news-everything/search-line/search-line.component.js ***!
+  \***************************************************************************/
+/***/ (() => {
+
+eval("angular.module(\"searchLine\").component(\"searchLine\", {\n  template: \"<div class=\\\"m-8 flex h-10\\\">\\n                    <div class=\\\"flex text-2xl mr-3\\\">Search:</div>\\n                    <input ng-model=\\\"$ctrl.query\\\" ng-keyup=\\\"$ctrl.pressEnter($event)\\\" class=\\\"border p-2 rounded-lg\\\" placeholder=\\\"Enter your query\\\"/>\\n                    <button ng-click=\\\"$ctrl.clickBtn()\\\" class=\\\"bg-indigo-500 w-24 hover:bg-indigo-500/40 rounded-lg ml-3 text-xl\\\">Search</button>\\n                </div>\",\n  controller: function SearchLineController() {\n    this.query = \"\";\n\n    /**\n     * Вызываем событие родительского компонента для обновления новостей, передавая текущую строку с введенной новостью\n     */\n    this.clickBtn = function () {\n      if (!!!this.query) return;\n      this.onSearch({\n        query: this.query\n      });\n    };\n    this.pressEnter = function (event) {\n      if (event.keyCode !== 13) return;\n      this.clickBtn();\n    };\n  },\n  bindings: {\n    onSearch: \"&\"\n  }\n});\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-everything/search-line/search-line.component.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/news-everything/search-line/search-line.module.js":
+/*!************************************************************************!*\
+  !*** ./src/app/news/news-everything/search-line/search-line.module.js ***!
+  \************************************************************************/
+/***/ (() => {
+
+eval("angular.module(\"searchLine\", []);\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-everything/search-line/search-line.module.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/news-list/news-detail/news-detail.component.js":
+/*!*********************************************************************!*\
+  !*** ./src/app/news/news-list/news-detail/news-detail.component.js ***!
+  \*********************************************************************/
+/***/ (() => {
+
+eval("angular.module('newsDetail').component('newsDetail', {\n  template: \"<li class=\\\" flex flex-col border border-b-gray-400 m-8 rounded-lg\\\">       \\n                    <div class=\\\"bg-slate-500/50 min-h-12 content-center rounded-t-lg p-3 pl-10 text-xl font-medium\\\">\\n                        {{$ctrl.news.title}}\\n                    </div>\\n                    <div class=\\\"flex m-3 justify-between px-3\\\">\\n                        <p class=\\\"max-w-8xl text-lg mr-3\\\">{{$ctrl.news.description}}</p>\\n                        <div class=\\\"shrink-0 mr-5 max-h-44 rounded-lg border\\\">\\n                            <news-image image-url=\\\"$ctrl.imageUrl\\\"></news-image>\\n                        </div>\\n                    </div>\\n                    <button ng-click=\\\"$ctrl.btnClick()\\\" class=\\\"ml-6 h-10 mb-8 bg-indigo-500 w-24 hover:bg-indigo-500/40 rounded-lg text-xl\\\">See..</button>\\n                </li>\",\n  controller: function NewsDetailController($http) {\n    var self = this;\n    this.imageUrl = \"\";\n\n    /**\n     * Проверяем корректность ссылки на фотографию для текущей новости\n     * @param obj\n     */\n    this.$onChanges = function (obj) {\n      this.checkImgUrl = function () {\n        if (obj.news.currentValue.urlToImage === null) {\n          self.imageUrl = \"https://aisol.org/img/no-image.png\";\n          return;\n        }\n        $http.get(obj.news.currentValue.urlToImage, {\n          method: 'HEAD',\n          mode: 'no-cors'\n        }).then(function () {\n          self.imageUrl = obj.news.currentValue.urlToImage;\n        })[\"catch\"](function () {\n          self.imageUrl = \"https://aisol.org/img/no-image.png\";\n        });\n      };\n      this.checkImgUrl();\n    };\n    this.btnClick = function () {\n      window.open(this.news.url, '_blank');\n    };\n  },\n  bindings: {\n    news: '<'\n  }\n});\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-list/news-detail/news-detail.component.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/news-list/news-detail/news-detail.module.js":
+/*!******************************************************************!*\
+  !*** ./src/app/news/news-list/news-detail/news-detail.module.js ***!
+  \******************************************************************/
+/***/ (() => {
+
+eval("angular.module('newsDetail', [\"newsImage\"]);\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-list/news-detail/news-detail.module.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/news-list/news-detail/news-image/news-image.component.js":
+/*!*******************************************************************************!*\
+  !*** ./src/app/news/news-list/news-detail/news-image/news-image.component.js ***!
+  \*******************************************************************************/
+/***/ (() => {
+
+eval("angular.module(\"newsImage\").component(\"newsImage\", {\n  template: \"<img class=\\\"w-40 h-40 p-1\\\" alt=\\\"\\\" ng-src=\\\"{{$ctrl.imgUrl}}\\\"/>\",\n  controller: function NewsImageController() {\n    var self = this;\n    this.$onChanges = function (obj) {\n      if (obj.imageUrl.currentValue !== \"\") {\n        self.imgUrl = obj.imageUrl.currentValue;\n      }\n    };\n  },\n  bindings: {\n    imageUrl: \"<\",\n    key: \"=\"\n  }\n});\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-list/news-detail/news-image/news-image.component.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/news-list/news-detail/news-image/news-image.module.js":
+/*!****************************************************************************!*\
+  !*** ./src/app/news/news-list/news-detail/news-image/news-image.module.js ***!
+  \****************************************************************************/
+/***/ (() => {
+
+eval("angular.module(\"newsImage\", []);\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-list/news-detail/news-image/news-image.module.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/news-list/news-list.component.js":
+/*!*******************************************************!*\
+  !*** ./src/app/news/news-list/news-list.component.js ***!
+  \*******************************************************/
+/***/ (() => {
+
+eval("angular.module('newsList').component('newsList', {\n  template: \"<ul>\\n                    <p ng-if=\\\"$ctrl.checkNews()\\\" class=\\\"text-2xl m-8\\\">Unfortunately, there is no news with this request!</p>\\n                    <news-detail ng-repeat=\\\"item in $ctrl.newsList\\\" news=\\\"item\\\"></news-detail>\\n                </ul>\",\n  controller: function NewsListController() {\n    /**\n     * Возвращается логическое значение проверки пустой ли список сновостей\n     * @returns {boolean}\n     */\n    this.checkNews = function () {\n      return !!(this.newsList && this.newsList.length === 0);\n    };\n  },\n  bindings: {\n    newsList: '<'\n  }\n});\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-list/news-list.component.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/news-list/news-list.module.js":
+/*!****************************************************!*\
+  !*** ./src/app/news/news-list/news-list.module.js ***!
+  \****************************************************/
+/***/ (() => {
+
+eval("angular.module(\"newsList\", [\"newsDetail\"]);\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-list/news-list.module.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/news-top-headlines/filter-line/filter-line.component.js":
+/*!******************************************************************************!*\
+  !*** ./src/app/news/news-top-headlines/filter-line/filter-line.component.js ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("angular.module(\"filterLine\").component(\"filterLine\", {\n  template: \"<div class=\\\"m-8 flex h-10\\\">\\n                    <div class=\\\"flex text-2xl mr-3\\\">Filters:</div>\\n                    <selector sel-value=\\\"$ctrl.country\\\" sel-list=\\\"$ctrl.selectorCountries\\\" title=\\\"Country\\\"></selector>\\n                    <selector sel-value=\\\"$ctrl.category\\\" sel-list=\\\"$ctrl.selectorCategories\\\" title=\\\"Category\\\"></selector>\\n                    <button class=\\\"bg-indigo-500 w-24 hover:bg-indigo-500/40 rounded-lg ml-3 text-xl\\\" ng-click=\\\"$ctrl.clickFilter()\\\">Filter</button>\\n                </div>\",\n  controller: function FilterLineController($http) {\n    var self = this;\n    /**\n     * Инициализируем начальные значения, а именно список категорий и городов для select из json файлов\n     */\n    this.$onInit = function () {\n      var selCountry = __webpack_require__(/*! ../../../../selectors-data/selectorsCountry.json */ \"./src/selectors-data/selectorsCountry.json\");\n      var selCategory = __webpack_require__(/*! ../../../../selectors-data/selectorsCategory.json */ \"./src/selectors-data/selectorsCategory.json\");\n      this.selectorCountries = selCountry;\n      this.selectorCategories = selCategory;\n      this.country = \"\";\n      this.category = \"\";\n    };\n\n    /**\n     * Вызываем событие родительского компонента для обновления новостей, передавая текущий выбранный город и категорию\n     */\n    this.clickFilter = function () {\n      if (!!!this.country && !!!this.category) return;\n      this.onFilter({\n        country: this.country,\n        category: this.category\n      });\n    };\n  },\n  bindings: {\n    onFilter: \"&\"\n  }\n});\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-top-headlines/filter-line/filter-line.component.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/news-top-headlines/filter-line/filter-line.module.js":
+/*!***************************************************************************!*\
+  !*** ./src/app/news/news-top-headlines/filter-line/filter-line.module.js ***!
+  \***************************************************************************/
+/***/ (() => {
+
+eval("angular.module(\"filterLine\", [\"selector\"]);\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-top-headlines/filter-line/filter-line.module.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/news-top-headlines/filter-line/selector/selector.component.js":
+/*!************************************************************************************!*\
+  !*** ./src/app/news/news-top-headlines/filter-line/selector/selector.component.js ***!
+  \************************************************************************************/
+/***/ (() => {
+
+eval("angular.module('selector').component('selector', {\n  template: \"<select ng-model=\\\"$ctrl.selValue\\\" class=\\\"mx-5 w-36 h-10 rounded-lg p-1\\\">\\n                    <option value=\\\"\\\" selected hidden>{{$ctrl.title}}</option>\\n                    <option value=\\\"\\\"></option>\\n                    <option ng-repeat=\\\"item in $ctrl.selList\\\" value=\\\"{{item.value}}\\\">{{item.name}}</option>\\n<!--                    <selector-detail ng-repeat=\\\"item in $ctrl.selList\\\" option=\\\"item\\\"></selector-detail>-->\\n<!--                    \\u041F\\u044B\\u0442\\u0430\\u043B\\u0441\\u044F \\u0432\\u044B\\u043D\\u0435\\u0441\\u0442\\u0438 \\u043E\\u043F\\u0446\\u0438\\u044E \\u0432 \\u043E\\u0442\\u0434\\u0435\\u043B\\u044C\\u043D\\u044B\\u0439 \\u043A\\u043E\\u043C\\u043F\\u043E\\u043D\\u0435\\u043D\\u0442, \\u043D\\u043E \\u044D\\u0442\\u043E \\u043F\\u0440\\u043E\\u0441\\u0442\\u043E \\u043D\\u0435 \\u0440\\u0430\\u0431\\u043E\\u0442\\u0430\\u0435\\u0442. \\u0414\\u0430\\u043D\\u043D\\u044B\\u0435 \\u043D\\u0435 \\u0432\\u044B\\u0432\\u043E\\u0434\\u044F\\u0442\\u0441\\u044F((-->\\n                </select>\",\n  controller: function SelectorController() {},\n  bindings: {\n    selValue: '=',\n    selList: '<',\n    title: '@'\n  }\n});\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-top-headlines/filter-line/selector/selector.component.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/news-top-headlines/filter-line/selector/selector.module.js":
+/*!*********************************************************************************!*\
+  !*** ./src/app/news/news-top-headlines/filter-line/selector/selector.module.js ***!
+  \*********************************************************************************/
+/***/ (() => {
+
+eval("angular.module('selector', ['selectorDetail']);\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-top-headlines/filter-line/selector/selector.module.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/news-top-headlines/filter-line/selector/selectorDetail/selector-detail.component.js":
+/*!**********************************************************************************************************!*\
+  !*** ./src/app/news/news-top-headlines/filter-line/selector/selectorDetail/selector-detail.component.js ***!
+  \**********************************************************************************************************/
+/***/ (() => {
+
+eval("angular.module('selectorDetail').component('selectorDetail', {\n  template: \"<option value=\\\"$ctrl.option.value\\\">{{$ctrl.option.name}}</option>\",\n  controller: function SelectorDetailController() {},\n  bindings: {\n    option: '<'\n  }\n});\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-top-headlines/filter-line/selector/selectorDetail/selector-detail.component.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/news-top-headlines/filter-line/selector/selectorDetail/selector-detail.module.js":
+/*!*******************************************************************************************************!*\
+  !*** ./src/app/news/news-top-headlines/filter-line/selector/selectorDetail/selector-detail.module.js ***!
+  \*******************************************************************************************************/
+/***/ (() => {
+
+eval("angular.module('selectorDetail', []);\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-top-headlines/filter-line/selector/selectorDetail/selector-detail.module.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/news-top-headlines/news-top-headlines.component.js":
+/*!*************************************************************************!*\
+  !*** ./src/app/news/news-top-headlines/news-top-headlines.component.js ***!
+  \*************************************************************************/
+/***/ (() => {
+
+eval("angular.module('newsTopHeadlines').component('newsTopHeadlines', {\n  template: \"<div>\\n                    <div class=\\\"m-5 text-4xl\\\">Top Headlines</div>\\n                    <filter-line on-filter=\\\"$ctrl.clickFilter(country, category)\\\"></filter-line>\\n                    <news-list news-list=\\\"$ctrl.news\\\"></news-list>\\n                </div>\",\n  controller: function NewsTopHeadlinesController() {\n    var self = this;\n\n    /**\n     * Иницализируем текущие новости для параметра country: us, category: \"\"\n     */\n    this.$onInit = function () {\n      this.type = \"top-headlines\";\n      var params = {\n        country: \"us\",\n        category: \"\"\n      };\n      this.filterNews({\n        type: this.type,\n        params: params\n      });\n    };\n\n    /**\n     * Вызываем событие родительского элемента с обновлением ноовостей\n     * @param country - Страна выбранная в select\n     * @param category - Категория выбранная в select\n     */\n    this.clickFilter = function (country, category) {\n      var params = {\n        country: country,\n        category: category\n      };\n      this.filterNews({\n        type: this.type,\n        params: params\n      });\n    };\n  },\n  bindings: {\n    news: \"=\",\n    filterNews: \"&\"\n  }\n});\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-top-headlines/news-top-headlines.component.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/news-top-headlines/news-top-headlines.module.js":
+/*!**********************************************************************!*\
+  !*** ./src/app/news/news-top-headlines/news-top-headlines.module.js ***!
+  \**********************************************************************/
+/***/ (() => {
+
+eval("angular.module('newsTopHeadlines', ['ngRoute', 'newsList', 'filterLine']);\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-top-headlines/news-top-headlines.module.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/pagination/pagination-detail/pagination-detail.component.js":
+/*!**********************************************************************************!*\
+  !*** ./src/app/news/pagination/pagination-detail/pagination-detail.component.js ***!
+  \**********************************************************************************/
+/***/ (() => {
+
+eval("angular.module(\"paginationDetail\").component(\"paginationDetail\", {\n  template: \"<button ng-click=\\\"$ctrl.clickPage($event)\\\" ng-class=\\\"{'bg-indigo-500/40': $ctrl.checkValueForAddClass()}\\\" class=\\\"p-2 bg-indigo-500 w-12 m-0.5 hover:bg-indigo-500/40 rounded-lg\\\">{{$ctrl.value}}</button>\",\n  controller: function PaginationDetailController() {\n    /**\n     * Проверяем является ли кнопка текущей, для добавления стиля в ее шаблоне\n     * @returns {boolean}\n     */\n    this.checkValueForAddClass = function () {\n      return this.value === this.curPage;\n    };\n\n    /**\n     * Вызываем событие родительского компонента для текущей нажатой кнопки\n     * @param $event\n     */\n    this.clickPage = function ($event) {\n      this.onClick({\n        btn: $event.target.textContent\n      });\n    };\n  },\n  bindings: {\n    value: \"<\",\n    onClick: \"&\",\n    curPage: \"<\"\n  }\n});\n\n//# sourceURL=webpack://work-test-task/./src/app/news/pagination/pagination-detail/pagination-detail.component.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/pagination/pagination-detail/pagination-detail.module.js":
+/*!*******************************************************************************!*\
+  !*** ./src/app/news/pagination/pagination-detail/pagination-detail.module.js ***!
+  \*******************************************************************************/
+/***/ (() => {
+
+eval("angular.module(\"paginationDetail\", []);\n\n//# sourceURL=webpack://work-test-task/./src/app/news/pagination/pagination-detail/pagination-detail.module.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/pagination/pagination.component.js":
+/*!*********************************************************!*\
+  !*** ./src/app/news/pagination/pagination.component.js ***!
+  \*********************************************************/
+/***/ (() => {
+
+eval("angular.module(\"pagination\").component(\"pagination\", {\n  template: \"<div class=\\\"flex justify-center\\\">\\n                    <pagination-detail on-click=\\\"$ctrl.clickBtn(btn)\\\" cur-page=\\\"$ctrl.curPage\\\" ng-repeat=\\\"btn in $ctrl.pagArray\\\" value=\\\"btn\\\"></pagination-detail>\\n                </div>\",\n  controller: function PaginationController() {\n    this.$onInit = function () {\n      this.curPage = 1;\n      this.pageSize = 5;\n      this.maxPagesToShow = Math.ceil(100 / this.pageSize);\n      this.pagArray = this.createArray();\n    };\n    var self = this;\n\n    /**\n     * При изменении списка новостей на новый с другими параметрами, создаем новый массив с элементами пагинации\n     * @param changesObj\n     */\n    this.$onChanges = function (changesObj) {\n      if (\"arrayLength\" in changesObj && this.isPageChange) {\n        this.curPage = 1;\n        this.pagArray = this.createArray();\n        this.isPageChange = false;\n      }\n    };\n\n    /**\n     * Создаем массив с элементами пагинации для определенного количества страниц\n     * @returns {string[]} - Массив с элементами пагинации\n     */\n    this.createArray = function () {\n      var length = this.arrayLength;\n      var resArray = [\"<<\", \"<\"];\n      function getArray(length) {\n        for (var i = 2; i < length + 1; i++) resArray.push(i - 1);\n      }\n      if (length > this.pageSize * this.maxPagesToShow) getArray(this.maxPagesToShow / 2 + 1);else {\n        var newLength = Math.ceil(length / this.pageSize);\n        getArray(newLength + 1);\n      }\n      resArray.push(\">\");\n      return resArray;\n    };\n\n    /**\n     * Изменяем элементы массива пагинации\n     * @param type - Знак + или -, в зависимости от которого значения будут либо уменьшаться, либо увеличиваться на единицу\n     */\n    this.changeArray = function (type) {\n      if (this.arrayLength / this.pageSize < this.maxPagesToShow / 2 + 1) return;\n      var maxPages = Math.ceil(this.arrayLength / this.pageSize);\n      for (var i = 2; i < this.pagArray.length - 1; i++) {\n        if (type === \"+\") {\n          var res = this.pagArray[i] + 1;\n          if (res > maxPages) return;\n          this.pagArray[i] = res;\n        } else {\n          var _res = this.pagArray[i] - 1;\n          if (_res === 0) return;\n          this.pagArray[i] = _res;\n        }\n      }\n    };\n\n    /**\n     * Определяем какая кнопка была нажата и в соответствии с этим изменяем массив с элементами пагинации\n     * @param btn - Нажатая кнопка в пагинации\n     */\n    this.clickBtn = function (btn) {\n      var resPage;\n      switch (btn) {\n        case \"<<\":\n          this.onClick({\n            number: 1\n          });\n          this.curPage = 1;\n          this.pagArray = this.createArray();\n          break;\n        case \">\":\n          resPage = this.curPage + 1;\n          if (resPage > this.maxPagesToShow) {\n            alert(\"Only 100 news available!\");\n            return;\n          }\n          if (resPage > Math.ceil(this.arrayLength / this.pageSize)) return;\n          this.curPage = resPage;\n          this.changeArray(\"+\");\n          this.onClick({\n            number: this.curPage\n          });\n          break;\n        case \"<\":\n          resPage = this.curPage - 1;\n          if (resPage <= 0) return;\n          this.curPage = resPage;\n          this.changeArray(\"-\");\n          this.onClick({\n            number: this.curPage\n          });\n          break;\n        default:\n          var num = Number(btn);\n          if (num > this.curPage) {\n            if (num > this.maxPagesToShow) {\n              alert(\"Only 100 news available!\");\n              return;\n            }\n            this.curPage = num;\n            this.changeArray(\"+\");\n          } else if (num < this.curPage) {\n            this.curPage = num;\n            this.changeArray(\"-\");\n          }\n          this.onClick({\n            number: btn\n          });\n      }\n    };\n  },\n  bindings: {\n    onClick: \"&\",\n    arrayLength: \"<\",\n    isPageChange: \"=\"\n  }\n});\n\n//# sourceURL=webpack://work-test-task/./src/app/news/pagination/pagination.component.js?");
+
+/***/ }),
+
+/***/ "./src/app/news/pagination/pagination.module.js":
+/*!******************************************************!*\
+  !*** ./src/app/news/pagination/pagination.module.js ***!
+  \******************************************************/
+/***/ (() => {
+
+eval("angular.module('pagination', [\"paginationDetail\"]);\n\n//# sourceURL=webpack://work-test-task/./src/app/news/pagination/pagination.module.js?");
+
+/***/ }),
+
+/***/ "./src/public/index.js":
+/*!*****************************!*\
+  !*** ./src/public/index.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("__webpack_require__(/*! ./style.css */ \"./src/public/style.css\");\n__webpack_require__(/*! angular/angular */ \"./node_modules/angular/angular.js\");\n__webpack_require__(/*! angular-route/angular-route */ \"./node_modules/angular-route/angular-route.js\");\n__webpack_require__(/*! angular-resource/angular-resource */ \"./node_modules/angular-resource/angular-resource.js\");\n\n// Модуль и функционал Сервиса для получения списка новостей с сервера\n__webpack_require__(/*! ../app/core/news/news.module */ \"./src/app/core/news/news.module.js\");\n__webpack_require__(/*! ../app/core/news/news.service */ \"./src/app/core/news/news.service.js\");\n\n// Модуль и компонент Одной кнопки в пагинации\n__webpack_require__(/*! ../app/news/pagination/pagination-detail/pagination-detail.module */ \"./src/app/news/pagination/pagination-detail/pagination-detail.module.js\");\n__webpack_require__(/*! ../app/news/pagination/pagination-detail/pagination-detail.component */ \"./src/app/news/pagination/pagination-detail/pagination-detail.component.js\");\n\n// Модуль и компонент Пагинации\n__webpack_require__(/*! ../app/news/pagination/pagination.module */ \"./src/app/news/pagination/pagination.module.js\");\n__webpack_require__(/*! ../app/news/pagination/pagination.component */ \"./src/app/news/pagination/pagination.component.js\");\n\n// Модуль и компонент Фотографии в новости\n__webpack_require__(/*! ../app/news/news-list/news-detail/news-image/news-image.module */ \"./src/app/news/news-list/news-detail/news-image/news-image.module.js\");\n__webpack_require__(/*! ../app/news/news-list/news-detail/news-image/news-image.component */ \"./src/app/news/news-list/news-detail/news-image/news-image.component.js\");\n\n// Модуль и компонент Одной новости\n__webpack_require__(/*! ../app/news/news-list/news-detail/news-detail.module */ \"./src/app/news/news-list/news-detail/news-detail.module.js\");\n__webpack_require__(/*! ../app/news/news-list/news-detail/news-detail.component */ \"./src/app/news/news-list/news-detail/news-detail.component.js\");\n\n// Модуль и компонент Списка новостей\n__webpack_require__(/*! ../app/news/news-list/news-list.module */ \"./src/app/news/news-list/news-list.module.js\");\n__webpack_require__(/*! ../app/news/news-list/news-list.component */ \"./src/app/news/news-list/news-list.component.js\");\n\n// Модуль и компонент Одной опции select\n__webpack_require__(/*! ../app/news/news-top-headlines/filter-line/selector/selectorDetail/selector-detail.module */ \"./src/app/news/news-top-headlines/filter-line/selector/selectorDetail/selector-detail.module.js\");\n__webpack_require__(/*! ../app/news/news-top-headlines/filter-line/selector/selectorDetail/selector-detail.component */ \"./src/app/news/news-top-headlines/filter-line/selector/selectorDetail/selector-detail.component.js\");\n\n// Модуль и компонент Целого select\n__webpack_require__(/*! ../app/news/news-top-headlines/filter-line/selector/selector.module */ \"./src/app/news/news-top-headlines/filter-line/selector/selector.module.js\");\n__webpack_require__(/*! ../app/news/news-top-headlines/filter-line/selector/selector.component */ \"./src/app/news/news-top-headlines/filter-line/selector/selector.component.js\");\n\n// Модуль со строкой фильтрации на странице с Самыми популярными новостями\n__webpack_require__(/*! ../app/news/news-top-headlines/filter-line/filter-line.module */ \"./src/app/news/news-top-headlines/filter-line/filter-line.module.js\");\n__webpack_require__(/*! ../app/news/news-top-headlines/filter-line/filter-line.component */ \"./src/app/news/news-top-headlines/filter-line/filter-line.component.js\");\n\n// Модуль со строкой ввода на странице со Всеми новостями\n__webpack_require__(/*! ../app/news/news-everything/search-line/search-line.module */ \"./src/app/news/news-everything/search-line/search-line.module.js\");\n__webpack_require__(/*! ../app/news/news-everything/search-line/search-line.component */ \"./src/app/news/news-everything/search-line/search-line.component.js\");\n\n// Модуль и компонент страницы с Самыми популярными новостями\n__webpack_require__(/*! ../app/news/news-top-headlines/news-top-headlines.module */ \"./src/app/news/news-top-headlines/news-top-headlines.module.js\");\n__webpack_require__(/*! ../app/news/news-top-headlines/news-top-headlines.component */ \"./src/app/news/news-top-headlines/news-top-headlines.component.js\");\n\n// Модуль и компонент страницы со Всеми новостями\n__webpack_require__(/*! ../app/news/news-everything/news-everything.module */ \"./src/app/news/news-everything/news-everything.module.js\");\n__webpack_require__(/*! ../app/news/news-everything/news-everything.component */ \"./src/app/news/news-everything/news-everything.component.js\");\n\n// Модуль и конфигурация Приложения\n__webpack_require__(/*! ../app/app.module */ \"./src/app/app.module.js\");\n__webpack_require__(/*! ../app/app.component */ \"./src/app/app.component.js\");\n\n//# sourceURL=webpack://work-test-task/./src/public/index.js?");
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/public/style.css":
 /*!**************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/public/style.css ***!
@@ -46,7 +328,7 @@ eval("/**\n * @license AngularJS v1.8.2\n * (c) 2010-2020 Google LLC. http://ang
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/noSourceMaps.js */ \"./node_modules/css-loader/dist/runtime/noSourceMaps.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);\n// Imports\n\n\nvar ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));\n// Module\n___CSS_LOADER_EXPORT___.push([module.id, \"/*\\n! tailwindcss v3.3.1 | MIT License | https://tailwindcss.com\\n*//*\\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\\n*/\\n\\n*,\\n::before,\\n::after {\\n  box-sizing: border-box; /* 1 */\\n  border-width: 0; /* 2 */\\n  border-style: solid; /* 2 */\\n  border-color: #e5e7eb; /* 2 */\\n}\\n\\n::before,\\n::after {\\n  --tw-content: '';\\n}\\n\\n/*\\n1. Use a consistent sensible line-height in all browsers.\\n2. Prevent adjustments of font size after orientation changes in iOS.\\n3. Use a more readable tab size.\\n4. Use the user's configured `sans` font-family by default.\\n5. Use the user's configured `sans` font-feature-settings by default.\\n6. Use the user's configured `sans` font-variation-settings by default.\\n*/\\n\\nhtml {\\n  line-height: 1.5; /* 1 */\\n  -webkit-text-size-adjust: 100%; /* 2 */\\n  -moz-tab-size: 4; /* 3 */\\n  -o-tab-size: 4;\\n     tab-size: 4; /* 3 */\\n  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, \\\"Segoe UI\\\", Roboto, \\\"Helvetica Neue\\\", Arial, \\\"Noto Sans\\\", sans-serif, \\\"Apple Color Emoji\\\", \\\"Segoe UI Emoji\\\", \\\"Segoe UI Symbol\\\", \\\"Noto Color Emoji\\\"; /* 4 */\\n  font-feature-settings: normal; /* 5 */\\n  font-variation-settings: normal; /* 6 */\\n}\\n\\n/*\\n1. Remove the margin in all browsers.\\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\\n*/\\n\\nbody {\\n  margin: 0; /* 1 */\\n  line-height: inherit; /* 2 */\\n}\\n\\n/*\\n1. Add the correct height in Firefox.\\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\\n3. Ensure horizontal rules are visible by default.\\n*/\\n\\nhr {\\n  height: 0; /* 1 */\\n  color: inherit; /* 2 */\\n  border-top-width: 1px; /* 3 */\\n}\\n\\n/*\\nAdd the correct text decoration in Chrome, Edge, and Safari.\\n*/\\n\\nabbr:where([title]) {\\n  text-decoration: underline;\\n  -webkit-text-decoration: underline dotted;\\n          text-decoration: underline dotted;\\n}\\n\\n/*\\nRemove the default font size and weight for headings.\\n*/\\n\\nh1,\\nh2,\\nh3,\\nh4,\\nh5,\\nh6 {\\n  font-size: inherit;\\n  font-weight: inherit;\\n}\\n\\n/*\\nReset links to optimize for opt-in styling instead of opt-out.\\n*/\\n\\na {\\n  color: inherit;\\n  text-decoration: inherit;\\n}\\n\\n/*\\nAdd the correct font weight in Edge and Safari.\\n*/\\n\\nb,\\nstrong {\\n  font-weight: bolder;\\n}\\n\\n/*\\n1. Use the user's configured `mono` font family by default.\\n2. Correct the odd `em` font sizing in all browsers.\\n*/\\n\\ncode,\\nkbd,\\nsamp,\\npre {\\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \\\"Liberation Mono\\\", \\\"Courier New\\\", monospace; /* 1 */\\n  font-size: 1em; /* 2 */\\n}\\n\\n/*\\nAdd the correct font size in all browsers.\\n*/\\n\\nsmall {\\n  font-size: 80%;\\n}\\n\\n/*\\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\\n*/\\n\\nsub,\\nsup {\\n  font-size: 75%;\\n  line-height: 0;\\n  position: relative;\\n  vertical-align: baseline;\\n}\\n\\nsub {\\n  bottom: -0.25em;\\n}\\n\\nsup {\\n  top: -0.5em;\\n}\\n\\n/*\\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\\n3. Remove gaps between table borders by default.\\n*/\\n\\ntable {\\n  text-indent: 0; /* 1 */\\n  border-color: inherit; /* 2 */\\n  border-collapse: collapse; /* 3 */\\n}\\n\\n/*\\n1. Change the font styles in all browsers.\\n2. Remove the margin in Firefox and Safari.\\n3. Remove default padding in all browsers.\\n*/\\n\\nbutton,\\ninput,\\noptgroup,\\nselect,\\ntextarea {\\n  font-family: inherit; /* 1 */\\n  font-size: 100%; /* 1 */\\n  font-weight: inherit; /* 1 */\\n  line-height: inherit; /* 1 */\\n  color: inherit; /* 1 */\\n  margin: 0; /* 2 */\\n  padding: 0; /* 3 */\\n}\\n\\n/*\\nRemove the inheritance of text transform in Edge and Firefox.\\n*/\\n\\nbutton,\\nselect {\\n  text-transform: none;\\n}\\n\\n/*\\n1. Correct the inability to style clickable types in iOS and Safari.\\n2. Remove default button styles.\\n*/\\n\\nbutton,\\n[type='button'],\\n[type='reset'],\\n[type='submit'] {\\n  -webkit-appearance: button; /* 1 */\\n  background-color: transparent; /* 2 */\\n  background-image: none; /* 2 */\\n}\\n\\n/*\\nUse the modern Firefox focus style for all focusable elements.\\n*/\\n\\n:-moz-focusring {\\n  outline: auto;\\n}\\n\\n/*\\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\\n*/\\n\\n:-moz-ui-invalid {\\n  box-shadow: none;\\n}\\n\\n/*\\nAdd the correct vertical alignment in Chrome and Firefox.\\n*/\\n\\nprogress {\\n  vertical-align: baseline;\\n}\\n\\n/*\\nCorrect the cursor style of increment and decrement buttons in Safari.\\n*/\\n\\n::-webkit-inner-spin-button,\\n::-webkit-outer-spin-button {\\n  height: auto;\\n}\\n\\n/*\\n1. Correct the odd appearance in Chrome and Safari.\\n2. Correct the outline style in Safari.\\n*/\\n\\n[type='search'] {\\n  -webkit-appearance: textfield; /* 1 */\\n  outline-offset: -2px; /* 2 */\\n}\\n\\n/*\\nRemove the inner padding in Chrome and Safari on macOS.\\n*/\\n\\n::-webkit-search-decoration {\\n  -webkit-appearance: none;\\n}\\n\\n/*\\n1. Correct the inability to style clickable types in iOS and Safari.\\n2. Change font properties to `inherit` in Safari.\\n*/\\n\\n::-webkit-file-upload-button {\\n  -webkit-appearance: button; /* 1 */\\n  font: inherit; /* 2 */\\n}\\n\\n/*\\nAdd the correct display in Chrome and Safari.\\n*/\\n\\nsummary {\\n  display: list-item;\\n}\\n\\n/*\\nRemoves the default spacing and border for appropriate elements.\\n*/\\n\\nblockquote,\\ndl,\\ndd,\\nh1,\\nh2,\\nh3,\\nh4,\\nh5,\\nh6,\\nhr,\\nfigure,\\np,\\npre {\\n  margin: 0;\\n}\\n\\nfieldset {\\n  margin: 0;\\n  padding: 0;\\n}\\n\\nlegend {\\n  padding: 0;\\n}\\n\\nol,\\nul,\\nmenu {\\n  list-style: none;\\n  margin: 0;\\n  padding: 0;\\n}\\n\\n/*\\nPrevent resizing textareas horizontally by default.\\n*/\\n\\ntextarea {\\n  resize: vertical;\\n}\\n\\n/*\\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\\n2. Set the default placeholder color to the user's configured gray 400 color.\\n*/\\n\\ninput::-moz-placeholder, textarea::-moz-placeholder {\\n  opacity: 1; /* 1 */\\n  color: #9ca3af; /* 2 */\\n}\\n\\ninput::placeholder,\\ntextarea::placeholder {\\n  opacity: 1; /* 1 */\\n  color: #9ca3af; /* 2 */\\n}\\n\\n/*\\nSet the default cursor for buttons.\\n*/\\n\\nbutton,\\n[role=\\\"button\\\"] {\\n  cursor: pointer;\\n}\\n\\n/*\\nMake sure disabled buttons don't get the pointer cursor.\\n*/\\n:disabled {\\n  cursor: default;\\n}\\n\\n/*\\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\\n   This can trigger a poorly considered lint error in some tools but is included by design.\\n*/\\n\\nimg,\\nsvg,\\nvideo,\\ncanvas,\\naudio,\\niframe,\\nembed,\\nobject {\\n  display: block; /* 1 */\\n  vertical-align: middle; /* 2 */\\n}\\n\\n/*\\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\\n*/\\n\\nimg,\\nvideo {\\n  max-width: 100%;\\n  height: auto;\\n}\\n\\n/* Make elements with the HTML hidden attribute stay hidden by default */\\n[hidden] {\\n  display: none;\\n}\\n\\n*, ::before, ::after {\\n  --tw-border-spacing-x: 0;\\n  --tw-border-spacing-y: 0;\\n  --tw-translate-x: 0;\\n  --tw-translate-y: 0;\\n  --tw-rotate: 0;\\n  --tw-skew-x: 0;\\n  --tw-skew-y: 0;\\n  --tw-scale-x: 1;\\n  --tw-scale-y: 1;\\n  --tw-pan-x:  ;\\n  --tw-pan-y:  ;\\n  --tw-pinch-zoom:  ;\\n  --tw-scroll-snap-strictness: proximity;\\n  --tw-ordinal:  ;\\n  --tw-slashed-zero:  ;\\n  --tw-numeric-figure:  ;\\n  --tw-numeric-spacing:  ;\\n  --tw-numeric-fraction:  ;\\n  --tw-ring-inset:  ;\\n  --tw-ring-offset-width: 0px;\\n  --tw-ring-offset-color: #fff;\\n  --tw-ring-color: rgba(59, 130, 246, 0.5);\\n  --tw-ring-offset-shadow: 0 0 rgba(0,0,0,0);\\n  --tw-ring-shadow: 0 0 rgba(0,0,0,0);\\n  --tw-shadow: 0 0 rgba(0,0,0,0);\\n  --tw-shadow-colored: 0 0 rgba(0,0,0,0);\\n  --tw-blur:  ;\\n  --tw-brightness:  ;\\n  --tw-contrast:  ;\\n  --tw-grayscale:  ;\\n  --tw-hue-rotate:  ;\\n  --tw-invert:  ;\\n  --tw-saturate:  ;\\n  --tw-sepia:  ;\\n  --tw-drop-shadow:  ;\\n  --tw-backdrop-blur:  ;\\n  --tw-backdrop-brightness:  ;\\n  --tw-backdrop-contrast:  ;\\n  --tw-backdrop-grayscale:  ;\\n  --tw-backdrop-hue-rotate:  ;\\n  --tw-backdrop-invert:  ;\\n  --tw-backdrop-opacity:  ;\\n  --tw-backdrop-saturate:  ;\\n  --tw-backdrop-sepia:  ;\\n}\\n\\n::backdrop {\\n  --tw-border-spacing-x: 0;\\n  --tw-border-spacing-y: 0;\\n  --tw-translate-x: 0;\\n  --tw-translate-y: 0;\\n  --tw-rotate: 0;\\n  --tw-skew-x: 0;\\n  --tw-skew-y: 0;\\n  --tw-scale-x: 1;\\n  --tw-scale-y: 1;\\n  --tw-pan-x:  ;\\n  --tw-pan-y:  ;\\n  --tw-pinch-zoom:  ;\\n  --tw-scroll-snap-strictness: proximity;\\n  --tw-ordinal:  ;\\n  --tw-slashed-zero:  ;\\n  --tw-numeric-figure:  ;\\n  --tw-numeric-spacing:  ;\\n  --tw-numeric-fraction:  ;\\n  --tw-ring-inset:  ;\\n  --tw-ring-offset-width: 0px;\\n  --tw-ring-offset-color: #fff;\\n  --tw-ring-color: rgba(59, 130, 246, 0.5);\\n  --tw-ring-offset-shadow: 0 0 rgba(0,0,0,0);\\n  --tw-ring-shadow: 0 0 rgba(0,0,0,0);\\n  --tw-shadow: 0 0 rgba(0,0,0,0);\\n  --tw-shadow-colored: 0 0 rgba(0,0,0,0);\\n  --tw-blur:  ;\\n  --tw-brightness:  ;\\n  --tw-contrast:  ;\\n  --tw-grayscale:  ;\\n  --tw-hue-rotate:  ;\\n  --tw-invert:  ;\\n  --tw-saturate:  ;\\n  --tw-sepia:  ;\\n  --tw-drop-shadow:  ;\\n  --tw-backdrop-blur:  ;\\n  --tw-backdrop-brightness:  ;\\n  --tw-backdrop-contrast:  ;\\n  --tw-backdrop-grayscale:  ;\\n  --tw-backdrop-hue-rotate:  ;\\n  --tw-backdrop-invert:  ;\\n  --tw-backdrop-opacity:  ;\\n  --tw-backdrop-saturate:  ;\\n  --tw-backdrop-sepia:  ;\\n}\\n.m-3 {\\n  margin: 0.75rem;\\n}\\n.m-5 {\\n  margin: 1.25rem;\\n}\\n.m-8 {\\n  margin: 2rem;\\n}\\n.mx-5 {\\n  margin-left: 1.25rem;\\n  margin-right: 1.25rem;\\n}\\n.ml-3 {\\n  margin-left: 0.75rem;\\n}\\n.mr-3 {\\n  margin-right: 0.75rem;\\n}\\n.mr-5 {\\n  margin-right: 1.25rem;\\n}\\n.mt-5 {\\n  margin-top: 1.25rem;\\n}\\n.block {\\n  display: block;\\n}\\n.flex {\\n  display: flex;\\n}\\n.hidden {\\n  display: none;\\n}\\n.h-10 {\\n  height: 2.5rem;\\n}\\n.h-12 {\\n  height: 3rem;\\n}\\n.h-32 {\\n  height: 8rem;\\n}\\n.h-40 {\\n  height: 10rem;\\n}\\n.h-full {\\n  height: 100%;\\n}\\n.w-24 {\\n  width: 6rem;\\n}\\n.w-36 {\\n  width: 9rem;\\n}\\n.w-40 {\\n  width: 10rem;\\n}\\n.w-64 {\\n  width: 16rem;\\n}\\n.max-w-4xl {\\n  max-width: 56rem;\\n}\\n.flex-col {\\n  flex-direction: column;\\n}\\n.content-center {\\n  align-content: center;\\n}\\n.justify-between {\\n  justify-content: space-between;\\n}\\n.rounded-lg {\\n  border-radius: 0.5rem;\\n}\\n.rounded-t-lg {\\n  border-top-left-radius: 0.5rem;\\n  border-top-right-radius: 0.5rem;\\n}\\n.border {\\n  border-width: 1px;\\n}\\n.border-2 {\\n  border-width: 2px;\\n}\\n.border-b-gray-400 {\\n  --tw-border-opacity: 1;\\n  border-bottom-color: rgba(156, 163, 175, 1);\\n  border-bottom-color: rgb(156 163 175 / var(--tw-border-opacity));\\n}\\n.bg-indigo-500 {\\n  --tw-bg-opacity: 1;\\n  background-color: rgba(99, 102, 241, 1);\\n  background-color: rgb(99 102 241 / var(--tw-bg-opacity));\\n}\\n.bg-slate-500\\\\/50 {\\n  background-color: rgba(100, 116, 139, 0.5);\\n}\\n.p-1 {\\n  padding: 0.25rem;\\n}\\n.p-2 {\\n  padding: 0.5rem;\\n}\\n.p-3 {\\n  padding: 0.75rem;\\n}\\n.px-3 {\\n  padding-left: 0.75rem;\\n  padding-right: 0.75rem;\\n}\\n.py-12 {\\n  padding-top: 3rem;\\n  padding-bottom: 3rem;\\n}\\n.pl-10 {\\n  padding-left: 2.5rem;\\n}\\n.text-center {\\n  text-align: center;\\n}\\n.align-middle {\\n  vertical-align: middle;\\n}\\n.text-2xl {\\n  font-size: 1.5rem;\\n  line-height: 2rem;\\n}\\n.text-4xl {\\n  font-size: 2.25rem;\\n  line-height: 2.5rem;\\n}\\n.text-lg {\\n  font-size: 1.125rem;\\n  line-height: 1.75rem;\\n}\\n.text-xl {\\n  font-size: 1.25rem;\\n  line-height: 1.75rem;\\n}\\n.font-medium {\\n  font-weight: 500;\\n}\\n.hover\\\\:border-solid:hover {\\n  border-style: solid;\\n}\\n.hover\\\\:bg-cyan-100\\\\/50:hover {\\n  background-color: rgba(207, 250, 254, 0.5);\\n}\\n.hover\\\\:bg-indigo-500\\\\/40:hover {\\n  background-color: rgba(99, 102, 241, 0.4);\\n}\\n.hover\\\\:shadow-lg:hover {\\n  --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);\\n  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);\\n  box-shadow: 0 0 rgba(0,0,0,0), 0 0 rgba(0,0,0,0), 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);\\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\\n}\", \"\"]);\n// Exports\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);\n\n\n//# sourceURL=webpack://work-test-task/./src/public/style.css?./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/noSourceMaps.js */ \"./node_modules/css-loader/dist/runtime/noSourceMaps.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);\n// Imports\n\n\nvar ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));\n// Module\n___CSS_LOADER_EXPORT___.push([module.id, \"/*\\n! tailwindcss v3.3.1 | MIT License | https://tailwindcss.com\\n*//*\\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\\n*/\\n\\n*,\\n::before,\\n::after {\\n  box-sizing: border-box; /* 1 */\\n  border-width: 0; /* 2 */\\n  border-style: solid; /* 2 */\\n  border-color: #e5e7eb; /* 2 */\\n}\\n\\n::before,\\n::after {\\n  --tw-content: '';\\n}\\n\\n/*\\n1. Use a consistent sensible line-height in all browsers.\\n2. Prevent adjustments of font size after orientation changes in iOS.\\n3. Use a more readable tab size.\\n4. Use the user's configured `sans` font-family by default.\\n5. Use the user's configured `sans` font-feature-settings by default.\\n6. Use the user's configured `sans` font-variation-settings by default.\\n*/\\n\\nhtml {\\n  line-height: 1.5; /* 1 */\\n  -webkit-text-size-adjust: 100%; /* 2 */\\n  -moz-tab-size: 4; /* 3 */\\n  -o-tab-size: 4;\\n     tab-size: 4; /* 3 */\\n  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, \\\"Segoe UI\\\", Roboto, \\\"Helvetica Neue\\\", Arial, \\\"Noto Sans\\\", sans-serif, \\\"Apple Color Emoji\\\", \\\"Segoe UI Emoji\\\", \\\"Segoe UI Symbol\\\", \\\"Noto Color Emoji\\\"; /* 4 */\\n  font-feature-settings: normal; /* 5 */\\n  font-variation-settings: normal; /* 6 */\\n}\\n\\n/*\\n1. Remove the margin in all browsers.\\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\\n*/\\n\\nbody {\\n  margin: 0; /* 1 */\\n  line-height: inherit; /* 2 */\\n}\\n\\n/*\\n1. Add the correct height in Firefox.\\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\\n3. Ensure horizontal rules are visible by default.\\n*/\\n\\nhr {\\n  height: 0; /* 1 */\\n  color: inherit; /* 2 */\\n  border-top-width: 1px; /* 3 */\\n}\\n\\n/*\\nAdd the correct text decoration in Chrome, Edge, and Safari.\\n*/\\n\\nabbr:where([title]) {\\n  text-decoration: underline;\\n  -webkit-text-decoration: underline dotted;\\n          text-decoration: underline dotted;\\n}\\n\\n/*\\nRemove the default font size and weight for headings.\\n*/\\n\\nh1,\\nh2,\\nh3,\\nh4,\\nh5,\\nh6 {\\n  font-size: inherit;\\n  font-weight: inherit;\\n}\\n\\n/*\\nReset links to optimize for opt-in styling instead of opt-out.\\n*/\\n\\na {\\n  color: inherit;\\n  text-decoration: inherit;\\n}\\n\\n/*\\nAdd the correct font weight in Edge and Safari.\\n*/\\n\\nb,\\nstrong {\\n  font-weight: bolder;\\n}\\n\\n/*\\n1. Use the user's configured `mono` font family by default.\\n2. Correct the odd `em` font sizing in all browsers.\\n*/\\n\\ncode,\\nkbd,\\nsamp,\\npre {\\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \\\"Liberation Mono\\\", \\\"Courier New\\\", monospace; /* 1 */\\n  font-size: 1em; /* 2 */\\n}\\n\\n/*\\nAdd the correct font size in all browsers.\\n*/\\n\\nsmall {\\n  font-size: 80%;\\n}\\n\\n/*\\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\\n*/\\n\\nsub,\\nsup {\\n  font-size: 75%;\\n  line-height: 0;\\n  position: relative;\\n  vertical-align: baseline;\\n}\\n\\nsub {\\n  bottom: -0.25em;\\n}\\n\\nsup {\\n  top: -0.5em;\\n}\\n\\n/*\\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\\n3. Remove gaps between table borders by default.\\n*/\\n\\ntable {\\n  text-indent: 0; /* 1 */\\n  border-color: inherit; /* 2 */\\n  border-collapse: collapse; /* 3 */\\n}\\n\\n/*\\n1. Change the font styles in all browsers.\\n2. Remove the margin in Firefox and Safari.\\n3. Remove default padding in all browsers.\\n*/\\n\\nbutton,\\ninput,\\noptgroup,\\nselect,\\ntextarea {\\n  font-family: inherit; /* 1 */\\n  font-size: 100%; /* 1 */\\n  font-weight: inherit; /* 1 */\\n  line-height: inherit; /* 1 */\\n  color: inherit; /* 1 */\\n  margin: 0; /* 2 */\\n  padding: 0; /* 3 */\\n}\\n\\n/*\\nRemove the inheritance of text transform in Edge and Firefox.\\n*/\\n\\nbutton,\\nselect {\\n  text-transform: none;\\n}\\n\\n/*\\n1. Correct the inability to style clickable types in iOS and Safari.\\n2. Remove default button styles.\\n*/\\n\\nbutton,\\n[type='button'],\\n[type='reset'],\\n[type='submit'] {\\n  -webkit-appearance: button; /* 1 */\\n  background-color: transparent; /* 2 */\\n  background-image: none; /* 2 */\\n}\\n\\n/*\\nUse the modern Firefox focus style for all focusable elements.\\n*/\\n\\n:-moz-focusring {\\n  outline: auto;\\n}\\n\\n/*\\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\\n*/\\n\\n:-moz-ui-invalid {\\n  box-shadow: none;\\n}\\n\\n/*\\nAdd the correct vertical alignment in Chrome and Firefox.\\n*/\\n\\nprogress {\\n  vertical-align: baseline;\\n}\\n\\n/*\\nCorrect the cursor style of increment and decrement buttons in Safari.\\n*/\\n\\n::-webkit-inner-spin-button,\\n::-webkit-outer-spin-button {\\n  height: auto;\\n}\\n\\n/*\\n1. Correct the odd appearance in Chrome and Safari.\\n2. Correct the outline style in Safari.\\n*/\\n\\n[type='search'] {\\n  -webkit-appearance: textfield; /* 1 */\\n  outline-offset: -2px; /* 2 */\\n}\\n\\n/*\\nRemove the inner padding in Chrome and Safari on macOS.\\n*/\\n\\n::-webkit-search-decoration {\\n  -webkit-appearance: none;\\n}\\n\\n/*\\n1. Correct the inability to style clickable types in iOS and Safari.\\n2. Change font properties to `inherit` in Safari.\\n*/\\n\\n::-webkit-file-upload-button {\\n  -webkit-appearance: button; /* 1 */\\n  font: inherit; /* 2 */\\n}\\n\\n/*\\nAdd the correct display in Chrome and Safari.\\n*/\\n\\nsummary {\\n  display: list-item;\\n}\\n\\n/*\\nRemoves the default spacing and border for appropriate elements.\\n*/\\n\\nblockquote,\\ndl,\\ndd,\\nh1,\\nh2,\\nh3,\\nh4,\\nh5,\\nh6,\\nhr,\\nfigure,\\np,\\npre {\\n  margin: 0;\\n}\\n\\nfieldset {\\n  margin: 0;\\n  padding: 0;\\n}\\n\\nlegend {\\n  padding: 0;\\n}\\n\\nol,\\nul,\\nmenu {\\n  list-style: none;\\n  margin: 0;\\n  padding: 0;\\n}\\n\\n/*\\nPrevent resizing textareas horizontally by default.\\n*/\\n\\ntextarea {\\n  resize: vertical;\\n}\\n\\n/*\\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\\n2. Set the default placeholder color to the user's configured gray 400 color.\\n*/\\n\\ninput::-moz-placeholder, textarea::-moz-placeholder {\\n  opacity: 1; /* 1 */\\n  color: #9ca3af; /* 2 */\\n}\\n\\ninput::placeholder,\\ntextarea::placeholder {\\n  opacity: 1; /* 1 */\\n  color: #9ca3af; /* 2 */\\n}\\n\\n/*\\nSet the default cursor for buttons.\\n*/\\n\\nbutton,\\n[role=\\\"button\\\"] {\\n  cursor: pointer;\\n}\\n\\n/*\\nMake sure disabled buttons don't get the pointer cursor.\\n*/\\n:disabled {\\n  cursor: default;\\n}\\n\\n/*\\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\\n   This can trigger a poorly considered lint error in some tools but is included by design.\\n*/\\n\\nimg,\\nsvg,\\nvideo,\\ncanvas,\\naudio,\\niframe,\\nembed,\\nobject {\\n  display: block; /* 1 */\\n  vertical-align: middle; /* 2 */\\n}\\n\\n/*\\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\\n*/\\n\\nimg,\\nvideo {\\n  max-width: 100%;\\n  height: auto;\\n}\\n\\n/* Make elements with the HTML hidden attribute stay hidden by default */\\n[hidden] {\\n  display: none;\\n}\\n\\n*, ::before, ::after {\\n  --tw-border-spacing-x: 0;\\n  --tw-border-spacing-y: 0;\\n  --tw-translate-x: 0;\\n  --tw-translate-y: 0;\\n  --tw-rotate: 0;\\n  --tw-skew-x: 0;\\n  --tw-skew-y: 0;\\n  --tw-scale-x: 1;\\n  --tw-scale-y: 1;\\n  --tw-pan-x:  ;\\n  --tw-pan-y:  ;\\n  --tw-pinch-zoom:  ;\\n  --tw-scroll-snap-strictness: proximity;\\n  --tw-ordinal:  ;\\n  --tw-slashed-zero:  ;\\n  --tw-numeric-figure:  ;\\n  --tw-numeric-spacing:  ;\\n  --tw-numeric-fraction:  ;\\n  --tw-ring-inset:  ;\\n  --tw-ring-offset-width: 0px;\\n  --tw-ring-offset-color: #fff;\\n  --tw-ring-color: rgba(59, 130, 246, 0.5);\\n  --tw-ring-offset-shadow: 0 0 rgba(0,0,0,0);\\n  --tw-ring-shadow: 0 0 rgba(0,0,0,0);\\n  --tw-shadow: 0 0 rgba(0,0,0,0);\\n  --tw-shadow-colored: 0 0 rgba(0,0,0,0);\\n  --tw-blur:  ;\\n  --tw-brightness:  ;\\n  --tw-contrast:  ;\\n  --tw-grayscale:  ;\\n  --tw-hue-rotate:  ;\\n  --tw-invert:  ;\\n  --tw-saturate:  ;\\n  --tw-sepia:  ;\\n  --tw-drop-shadow:  ;\\n  --tw-backdrop-blur:  ;\\n  --tw-backdrop-brightness:  ;\\n  --tw-backdrop-contrast:  ;\\n  --tw-backdrop-grayscale:  ;\\n  --tw-backdrop-hue-rotate:  ;\\n  --tw-backdrop-invert:  ;\\n  --tw-backdrop-opacity:  ;\\n  --tw-backdrop-saturate:  ;\\n  --tw-backdrop-sepia:  ;\\n}\\n\\n::backdrop {\\n  --tw-border-spacing-x: 0;\\n  --tw-border-spacing-y: 0;\\n  --tw-translate-x: 0;\\n  --tw-translate-y: 0;\\n  --tw-rotate: 0;\\n  --tw-skew-x: 0;\\n  --tw-skew-y: 0;\\n  --tw-scale-x: 1;\\n  --tw-scale-y: 1;\\n  --tw-pan-x:  ;\\n  --tw-pan-y:  ;\\n  --tw-pinch-zoom:  ;\\n  --tw-scroll-snap-strictness: proximity;\\n  --tw-ordinal:  ;\\n  --tw-slashed-zero:  ;\\n  --tw-numeric-figure:  ;\\n  --tw-numeric-spacing:  ;\\n  --tw-numeric-fraction:  ;\\n  --tw-ring-inset:  ;\\n  --tw-ring-offset-width: 0px;\\n  --tw-ring-offset-color: #fff;\\n  --tw-ring-color: rgba(59, 130, 246, 0.5);\\n  --tw-ring-offset-shadow: 0 0 rgba(0,0,0,0);\\n  --tw-ring-shadow: 0 0 rgba(0,0,0,0);\\n  --tw-shadow: 0 0 rgba(0,0,0,0);\\n  --tw-shadow-colored: 0 0 rgba(0,0,0,0);\\n  --tw-blur:  ;\\n  --tw-brightness:  ;\\n  --tw-contrast:  ;\\n  --tw-grayscale:  ;\\n  --tw-hue-rotate:  ;\\n  --tw-invert:  ;\\n  --tw-saturate:  ;\\n  --tw-sepia:  ;\\n  --tw-drop-shadow:  ;\\n  --tw-backdrop-blur:  ;\\n  --tw-backdrop-brightness:  ;\\n  --tw-backdrop-contrast:  ;\\n  --tw-backdrop-grayscale:  ;\\n  --tw-backdrop-hue-rotate:  ;\\n  --tw-backdrop-invert:  ;\\n  --tw-backdrop-opacity:  ;\\n  --tw-backdrop-saturate:  ;\\n  --tw-backdrop-sepia:  ;\\n}\\n.m-0 {\\n  margin: 0px;\\n}\\n.m-0\\\\.5 {\\n  margin: 0.125rem;\\n}\\n.m-3 {\\n  margin: 0.75rem;\\n}\\n.m-5 {\\n  margin: 1.25rem;\\n}\\n.m-8 {\\n  margin: 2rem;\\n}\\n.mx-5 {\\n  margin-left: 1.25rem;\\n  margin-right: 1.25rem;\\n}\\n.mb-8 {\\n  margin-bottom: 2rem;\\n}\\n.ml-3 {\\n  margin-left: 0.75rem;\\n}\\n.ml-6 {\\n  margin-left: 1.5rem;\\n}\\n.mr-3 {\\n  margin-right: 0.75rem;\\n}\\n.mr-5 {\\n  margin-right: 1.25rem;\\n}\\n.mt-5 {\\n  margin-top: 1.25rem;\\n}\\n.block {\\n  display: block;\\n}\\n.flex {\\n  display: flex;\\n}\\n.hidden {\\n  display: none;\\n}\\n.h-10 {\\n  height: 2.5rem;\\n}\\n.h-32 {\\n  height: 8rem;\\n}\\n.h-40 {\\n  height: 10rem;\\n}\\n.h-full {\\n  height: 100%;\\n}\\n.max-h-44 {\\n  max-height: 11rem;\\n}\\n.w-12 {\\n  width: 3rem;\\n}\\n.w-24 {\\n  width: 6rem;\\n}\\n.w-36 {\\n  width: 9rem;\\n}\\n.w-40 {\\n  width: 10rem;\\n}\\n.w-64 {\\n  width: 16rem;\\n}\\n.shrink-0 {\\n  flex-shrink: 0;\\n}\\n.flex-col {\\n  flex-direction: column;\\n}\\n.content-center {\\n  align-content: center;\\n}\\n.justify-center {\\n  justify-content: center;\\n}\\n.justify-between {\\n  justify-content: space-between;\\n}\\n.rounded-lg {\\n  border-radius: 0.5rem;\\n}\\n.rounded-t-lg {\\n  border-top-left-radius: 0.5rem;\\n  border-top-right-radius: 0.5rem;\\n}\\n.border {\\n  border-width: 1px;\\n}\\n.border-2 {\\n  border-width: 2px;\\n}\\n.border-4 {\\n  border-width: 4px;\\n}\\n.border-b-gray-400 {\\n  --tw-border-opacity: 1;\\n  border-bottom-color: rgba(156, 163, 175, 1);\\n  border-bottom-color: rgb(156 163 175 / var(--tw-border-opacity));\\n}\\n.bg-cyan-100\\\\/50 {\\n  background-color: rgba(207, 250, 254, 0.5);\\n}\\n.bg-indigo-500 {\\n  --tw-bg-opacity: 1;\\n  background-color: rgba(99, 102, 241, 1);\\n  background-color: rgb(99 102 241 / var(--tw-bg-opacity));\\n}\\n.bg-indigo-500\\\\/40 {\\n  background-color: rgba(99, 102, 241, 0.4);\\n}\\n.bg-slate-500\\\\/50 {\\n  background-color: rgba(100, 116, 139, 0.5);\\n}\\n.p-1 {\\n  padding: 0.25rem;\\n}\\n.p-2 {\\n  padding: 0.5rem;\\n}\\n.p-3 {\\n  padding: 0.75rem;\\n}\\n.px-3 {\\n  padding-left: 0.75rem;\\n  padding-right: 0.75rem;\\n}\\n.py-12 {\\n  padding-top: 3rem;\\n  padding-bottom: 3rem;\\n}\\n.pl-10 {\\n  padding-left: 2.5rem;\\n}\\n.text-center {\\n  text-align: center;\\n}\\n.align-middle {\\n  vertical-align: middle;\\n}\\n.text-2xl {\\n  font-size: 1.5rem;\\n  line-height: 2rem;\\n}\\n.text-4xl {\\n  font-size: 2.25rem;\\n  line-height: 2.5rem;\\n}\\n.text-lg {\\n  font-size: 1.125rem;\\n  line-height: 1.75rem;\\n}\\n.text-xl {\\n  font-size: 1.25rem;\\n  line-height: 1.75rem;\\n}\\n.font-medium {\\n  font-weight: 500;\\n}\\n.hover\\\\:border-solid:hover {\\n  border-style: solid;\\n}\\n.hover\\\\:bg-cyan-100\\\\/50:hover {\\n  background-color: rgba(207, 250, 254, 0.5);\\n}\\n.hover\\\\:bg-indigo-500\\\\/40:hover {\\n  background-color: rgba(99, 102, 241, 0.4);\\n}\\n.hover\\\\:shadow-lg:hover {\\n  --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);\\n  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);\\n  box-shadow: 0 0 rgba(0,0,0,0), 0 0 rgba(0,0,0,0), 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);\\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\\n}\", \"\"]);\n// Exports\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);\n\n\n//# sourceURL=webpack://work-test-task/./src/public/style.css?./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js");
 
 /***/ }),
 
@@ -69,17 +351,6 @@ eval("\n\n/*\n  MIT License http://www.opensource.org/licenses/mit-license.php\n
 
 "use strict";
 eval("\n\nmodule.exports = function (i) {\n  return i[1];\n};\n\n//# sourceURL=webpack://work-test-task/./node_modules/css-loader/dist/runtime/noSourceMaps.js?");
-
-/***/ }),
-
-/***/ "./src/public/No-Image-Placeholder.png":
-/*!*********************************************!*\
-  !*** ./src/public/No-Image-Placeholder.png ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"1fa3a66407c398f653bc45261cda428f.png\");\n\n//# sourceURL=webpack://work-test-task/./src/public/No-Image-Placeholder.png?");
 
 /***/ }),
 
@@ -160,249 +431,6 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 
 /***/ }),
 
-/***/ "./src/api/newsApi.js":
-/*!****************************!*\
-  !*** ./src/api/newsApi.js ***!
-  \****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst API_KEY = \"8b849834da304a37bdafd5155f1bff1a\"\n\nclass NewsApi {\n    constructor() {\n        this.token = API_KEY\n        this.baseUrl = `https://newsapi.org/v2/`\n        this.options = this.createOptions(\"GET\")\n        this.fullUrl = \"\"\n    }\n\n    createOptions(method) {\n        const options = {\n            method,\n            headers: {\n                accept: \"application/json\",\n                \"Authorization\": `Bearer ${this.token}`,\n            }\n        }\n\n        return options\n    }\n\n    changeFullUrl(path, body) {\n        this.fullUrl = this.baseUrl + path + this.createFullPath(body)\n    }\n\n    createFullPath(body) {\n        if (!body)\n            return \"\"\n\n        let path = \"?\"\n        let count = 0\n        for (const param in body) {\n            if (body[param] === \"\") {\n                count++\n                continue\n            }\n\n            path += `${param}=${body[param]}`\n\n            if (count < Object.keys(body).length - 1)\n                path += `&`\n\n            count++\n        }\n\n        return path\n    }\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NewsApi);\n\n//# sourceURL=webpack://work-test-task/./src/api/newsApi.js?");
-
-/***/ }),
-
-/***/ "./src/app/app.component.js":
-/*!**********************************!*\
-  !*** ./src/app/app.component.js ***!
-  \**********************************/
-/***/ (() => {
-
-eval("angular.module('newsFeedApp')\n    .config(['$routeProvider',\n        function config($routeProvider) {\n            $routeProvider.\n            when('/newsTopHeadlines', {\n                template: `<news-top-headlines></news-top-headlines>`\n            }).\n            when('/newsEverything', {\n                template: `<news-everything></news-everything>`\n            }).\n            otherwise('/newsTopHeadlines')\n        }\n    ])\n    .component('newsFeedApp', {\n        template: `<div ng-app = \"newsFeedApp\" class=\"mx-5 mt-5\">\n                        <div class=\"flex border-2\">\n                            <div class=\"h-32 w-64 text-center hover:shadow-lg hover:bg-cyan-100/50 hover:border-solid text-xl\">\n                                <a class=\"py-12 block h-full\" href=\"#!/newsTopHeadlines\">Top Headlines</a>\n                            </div>\n                            <div class=\"h-32 w-64 text-center align-middle hover:shadow-lg hover:bg-cyan-100/50 hover:border-solid text-xl\">\n                                <a class=\"py-12 block h-full\" href=\"#!/newsEverything\">Everything</a>\n                            </div>\n                        </div>\n                        <div ng-view></div>\n                    </div>`,\n        controller: function NewsFeedAppController($routeParams) {\n        }\n    })\n\n//# sourceURL=webpack://work-test-task/./src/app/app.component.js?");
-
-/***/ }),
-
-/***/ "./src/app/app.module.js":
-/*!*******************************!*\
-  !*** ./src/app/app.module.js ***!
-  \*******************************/
-/***/ (() => {
-
-eval("angular.module('newsFeedApp', [\n    'ngRoute',\n    'newsEverything',\n    'newsTopHeadlines',\n]);\n\n//# sourceURL=webpack://work-test-task/./src/app/app.module.js?");
-
-/***/ }),
-
-/***/ "./src/app/core/news/news.module.js":
-/*!******************************************!*\
-  !*** ./src/app/core/news/news.module.js ***!
-  \******************************************/
-/***/ (() => {
-
-eval("angular.module(\"core.news\", [\n    'ngResource'\n])\n\n//# sourceURL=webpack://work-test-task/./src/app/core/news/news.module.js?");
-
-/***/ }),
-
-/***/ "./src/app/core/news/news.service.js":
-/*!*******************************************!*\
-  !*** ./src/app/core/news/news.service.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _api_newsApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../api/newsApi */ \"./src/api/newsApi.js\");\n\n\nangular\n    .module(\"core.news\")\n    .factory('News', function ($http, $resource) {\n        const newsApi = new _api_newsApi__WEBPACK_IMPORTED_MODULE_0__[\"default\"]()\n\n        return function getNews(path, body) {\n            switch (path) {\n                case \"everything\":\n                    newsApi.changeFullUrl(path, body)\n                    break\n                case \"top-headlines\":\n                    newsApi.changeFullUrl(path, body)\n                    break\n            }\n\n            // return $http.get(newsApi.fullUrl, newsApi.options)\n            //     .then(function (response) {\n            //         if (response.data.status) {\n            //             return response.data[\"articles\"]\n            //         }\n            //     }).then(function (data) {\n            //         return data\n            //     }).catch(err => {\n            //\n            //     })\n\n            return $resource(newsApi.fullUrl, {}, {\n                get: {\n                    method: \"GET\",\n                    headers: newsApi.options.headers,\n                }\n            })\n        }\n\n    })\n\n\n//# sourceURL=webpack://work-test-task/./src/app/core/news/news.service.js?");
-
-/***/ }),
-
-/***/ "./src/app/index.js":
-/*!**************************!*\
-  !*** ./src/app/index.js ***!
-  \**************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
-
-eval("__webpack_require__(/*! ../public/style.css */ \"./src/public/style.css\")\n\n__webpack_require__(/*! ../../node_modules/angular/angular */ \"./node_modules/angular/angular.js\")\n__webpack_require__(/*! ../../node_modules/angular-route/angular-route */ \"./node_modules/angular-route/angular-route.js\")\n__webpack_require__(/*! ../../node_modules/angular-resource/angular-resource */ \"./node_modules/angular-resource/angular-resource.js\")\n\n// Модуль и функционал Сервиса для получения списка новостей с сервера\n__webpack_require__(/*! ./core/news/news.module */ \"./src/app/core/news/news.module.js\")\n__webpack_require__(/*! ./core/news/news.service */ \"./src/app/core/news/news.service.js\")\n\n// Модуль и компонент Одной кнопки в пагинации\n__webpack_require__(/*! ./news/pagination/paginationDetail/paginationDetail.module */ \"./src/app/news/pagination/paginationDetail/paginationDetail.module.js\")\n__webpack_require__(/*! ./news/pagination/paginationDetail/paginationDetail.component */ \"./src/app/news/pagination/paginationDetail/paginationDetail.component.js\")\n\n// Модуль и компонент Пагинации\n__webpack_require__(/*! ./news/pagination/pagination.module */ \"./src/app/news/pagination/pagination.module.js\")\n__webpack_require__(/*! ./news/pagination/pagination.component */ \"./src/app/news/pagination/pagination.component.js\")\n\n// Модуль и компонент Одной новости\n__webpack_require__(/*! ./news/news-list/news-detail/news-detail.module */ \"./src/app/news/news-list/news-detail/news-detail.module.js\")\n__webpack_require__(/*! ./news/news-list/news-detail/news-detail.component */ \"./src/app/news/news-list/news-detail/news-detail.component.js\")\n\n// Модуль и компонент Списка новостей\n__webpack_require__(/*! ./news/news-list/news-list.module */ \"./src/app/news/news-list/news-list.module.js\")\n__webpack_require__(/*! ./news/news-list/news-list.component */ \"./src/app/news/news-list/news-list.component.js\")\n\n// Модуль и компонент Одной опции select\n__webpack_require__(/*! ./news/news-top-headlines/filter-line/selector/selectorDetail/selector-detail.module */ \"./src/app/news/news-top-headlines/filter-line/selector/selectorDetail/selector-detail.module.js\")\n__webpack_require__(/*! ./news/news-top-headlines/filter-line/selector/selectorDetail/selector-detail.component */ \"./src/app/news/news-top-headlines/filter-line/selector/selectorDetail/selector-detail.component.js\")\n\n// Модуль и компонент Целого select\n__webpack_require__(/*! ./news/news-top-headlines/filter-line/selector/selector.module */ \"./src/app/news/news-top-headlines/filter-line/selector/selector.module.js\")\n__webpack_require__(/*! ./news/news-top-headlines/filter-line/selector/selector.component */ \"./src/app/news/news-top-headlines/filter-line/selector/selector.component.js\")\n\n// Модуль со строкой фильтрации на странице с Самыми популярными новостями\n__webpack_require__(/*! ./news/news-top-headlines/filter-line/filter-line.module */ \"./src/app/news/news-top-headlines/filter-line/filter-line.module.js\")\n__webpack_require__(/*! ./news/news-top-headlines/filter-line/filter-line.component */ \"./src/app/news/news-top-headlines/filter-line/filter-line.component.js\")\n\n// Модуль и компонент страницы с Самыми популярными новостями\n__webpack_require__(/*! ./news/news-top-headlines/news-top-headlines.module */ \"./src/app/news/news-top-headlines/news-top-headlines.module.js\")\n__webpack_require__(/*! ./news/news-top-headlines/news-top-headlines.component */ \"./src/app/news/news-top-headlines/news-top-headlines.component.js\")\n\n// Модуль и компонент страницы со Всеми новостями\n__webpack_require__(/*! ./news/news-everything/news-everything.module */ \"./src/app/news/news-everything/news-everything.module.js\")\n__webpack_require__(/*! ./news/news-everything/news-everything.component */ \"./src/app/news/news-everything/news-everything.component.js\")\n\n// Модуль и конфигурация Приложения\n__webpack_require__(/*! ./app.module */ \"./src/app/app.module.js\")\n__webpack_require__(/*! ./app.component */ \"./src/app/app.component.js\")\n\n//# sourceURL=webpack://work-test-task/./src/app/index.js?");
-
-/***/ }),
-
-/***/ "./src/app/news/news-everything/news-everything.component.js":
-/*!*******************************************************************!*\
-  !*** ./src/app/news/news-everything/news-everything.component.js ***!
-  \*******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _api_newsApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../api/newsApi */ \"./src/api/newsApi.js\");\n/* harmony import */ var _public_No_Image_Placeholder_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../public/No-Image-Placeholder.png */ \"./src/public/No-Image-Placeholder.png\");\n\n\n\nangular.module('newsEverything').component('newsEverything', {\n    template: `<div>\n                    <div class=\"m-5 text-4xl \">Everything</div>\n                    <div class=\"m-8 flex h-10\">\n                        <div class=\"flex text-2xl mr-3\">Search:</div>\n                        <input ng-model=\"$ctrl.query\" ng-keyup=\"$ctrl.pressEnter($event)\" class=\"border p-2 rounded-lg\" placeholder=\"Enter your query\"/>\n                        <button ng-click=\"$ctrl.clickBtn()\" class=\"bg-indigo-500 w-24 hover:bg-indigo-500/40 rounded-lg ml-3 text-xl\">Search</button>\n                    </div>\n                    <news-list news-list=\"$ctrl.news\"></news-list>\n                    <div ng-if=\"$ctrl.isPagination\">\n                        <pagination></pagination>\n                    </div>\n                </div>`,\n    controller: function NewsEverythingController(News) {\n        const self = this\n        this.isPagination = false\n\n        this.pageSize = 5\n\n        this.changeNews = function (body) {\n            News(\"everything\", body).get(function (data) {\n                self.news = data[\"articles\"]\n\n                self.isPagination = data[\"articles\"].length !== 0\n            })\n        }\n\n        this.changeNews({\n            q: \"today\",\n            pageSize: this.pageSize,\n        })\n\n        this.pressEnter = function (event) {\n            if (event.keyCode === 13)\n                this.clickBtn()\n        }\n\n        this.clickBtn = function () {\n            if (!!!this.query)\n                return\n\n            this.changeNews({\n                q: this.query,\n                pageSize: this.pageSize,\n            })\n        }\n    }\n})\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-everything/news-everything.component.js?");
-
-/***/ }),
-
-/***/ "./src/app/news/news-everything/news-everything.module.js":
-/*!****************************************************************!*\
-  !*** ./src/app/news/news-everything/news-everything.module.js ***!
-  \****************************************************************/
-/***/ (() => {
-
-eval("angular.module('newsEverything', [\n    'ngRoute',\n    'newsList',\n    'core.news'\n])\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-everything/news-everything.module.js?");
-
-/***/ }),
-
-/***/ "./src/app/news/news-list/news-detail/news-detail.component.js":
-/*!*********************************************************************!*\
-  !*** ./src/app/news/news-list/news-detail/news-detail.component.js ***!
-  \*********************************************************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
-
-eval("__webpack_require__(/*! ../../../../public/No-Image-Placeholder.png */ \"./src/public/No-Image-Placeholder.png\")\n\nangular.module('newsDetail').component('newsDetail', {\n    template:  `<li class=\" flex flex-col border border-b-gray-400 m-8 rounded-lg\">       \n                    <div class=\"bg-slate-500/50 h-12 content-center rounded-t-lg p-3 pl-10 text-xl font-medium\">\n                        {{$ctrl.news.title}}\n                    </div>\n                    <div class=\"flex m-3 justify-between px-3 \">\n                        <p class=\"max-w-4xl text-lg\">{{$ctrl.news.description}}</p>\n                        <div ng-switch=\"$ctrl.news.urlToImage\" class=\"mr-5 rounded-lg border\">\n                            <img class=\"w-40 h-40 p-1\" ng-switch-when=\"\" src={} alt=\"\"/>\n                            <img class=\"w-40 h-40 p-1\" ng-switch-default ng-src=\"{{$ctrl.news.urlToImage}}\" alt=\"\" src={}/>\n                        </div>\n                    </div>\n                </li>`,\n    controller: function NewsDetailController() {\n\n    },\n    bindings: {\n        news: '<'\n    },\n})\n\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-list/news-detail/news-detail.component.js?");
-
-/***/ }),
-
-/***/ "./src/app/news/news-list/news-detail/news-detail.module.js":
-/*!******************************************************************!*\
-  !*** ./src/app/news/news-list/news-detail/news-detail.module.js ***!
-  \******************************************************************/
-/***/ (() => {
-
-eval("angular.module('newsDetail', [])\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-list/news-detail/news-detail.module.js?");
-
-/***/ }),
-
-/***/ "./src/app/news/news-list/news-list.component.js":
-/*!*******************************************************!*\
-  !*** ./src/app/news/news-list/news-list.component.js ***!
-  \*******************************************************/
-/***/ (() => {
-
-eval("angular.module('newsList').component('newsList', {\n    template:  `<ul>\n                    <p ng-if=\"$ctrl.newsList.length === 0\" class=\"text-2xl m-8\">Unfortunately, there is no news with this request!</p>\n                    <news-detail ng-repeat=\"item in $ctrl.newsList\" news=\"item\"></news-detail>\n                </ul>`,\n    controller: function NewsListController() {\n    },\n    bindings: {\n        newsList: '<',\n        asd: '<'\n    }\n})\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-list/news-list.component.js?");
-
-/***/ }),
-
-/***/ "./src/app/news/news-list/news-list.module.js":
-/*!****************************************************!*\
-  !*** ./src/app/news/news-list/news-list.module.js ***!
-  \****************************************************/
-/***/ (() => {
-
-eval("angular.module(\"newsList\", [\n    \"newsDetail\"\n])\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-list/news-list.module.js?");
-
-/***/ }),
-
-/***/ "./src/app/news/news-top-headlines/filter-line/filter-line.component.js":
-/*!******************************************************************************!*\
-  !*** ./src/app/news/news-top-headlines/filter-line/filter-line.component.js ***!
-  \******************************************************************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
-
-eval("const selCountry = __webpack_require__(/*! ../../../../selectors-data/selectorsCountry.json */ \"./src/selectors-data/selectorsCountry.json\")\nconst selCategory = __webpack_require__(/*! ../../../../selectors-data/selectorsCategory.json */ \"./src/selectors-data/selectorsCategory.json\")\n\nangular.module(\"filterLine\").component(\"filterLine\", {\n    template: `<div class=\"m-8 flex h-10\">\n                    <div class=\"flex text-2xl mr-3\">Filters:</div>\n                    <selector sel-value=\"$ctrl.orderCountry\" sel-list=\"$ctrl.selectorCountries\" title=\"'Country'\"></selector>\n                    <selector sel-value=\"$ctrl.orderCategory\" sel-list=\"$ctrl.selectorCategories\" title=\"'Category'\"></selector>\n                    <button class=\"bg-indigo-500 w-24 hover:bg-indigo-500/40 rounded-lg ml-3 text-xl\" ng-click=\"$ctrl.clickFilter()\">Filter</button>\n                </div>`,\n\n    controller: function FilterLineController() {\n        this.$onInit = function () {\n            this.selectorCountries = selCountry\n            this.selectorCategories = selCategory\n            this.orderCountry = \"\"\n            this.orderCategory = \"\"\n        }\n        let self = this\n\n        this.clickFilter = function () {\n            this.onClick({orderCountry: this.orderCountry, orderCategory: this.orderCategory})\n        }\n    },\n    bindings: {\n        onClick: \"@\",\n    }\n\n})\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-top-headlines/filter-line/filter-line.component.js?");
-
-/***/ }),
-
-/***/ "./src/app/news/news-top-headlines/filter-line/filter-line.module.js":
-/*!***************************************************************************!*\
-  !*** ./src/app/news/news-top-headlines/filter-line/filter-line.module.js ***!
-  \***************************************************************************/
-/***/ (() => {
-
-eval("angular.module(\"filterLine\", [\n    \"selector\"\n])\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-top-headlines/filter-line/filter-line.module.js?");
-
-/***/ }),
-
-/***/ "./src/app/news/news-top-headlines/filter-line/selector/selector.component.js":
-/*!************************************************************************************!*\
-  !*** ./src/app/news/news-top-headlines/filter-line/selector/selector.component.js ***!
-  \************************************************************************************/
-/***/ (() => {
-
-eval("angular.module('selector').component('selector', {\n    template:  `<select ng-model=\"$ctrl.selValue\" class=\"mx-5 w-36 rounded-lg\">\n                    <option value=\"show\" selected hidden>{{$ctrl.title}}</option>\n                    <option value=\"\"></option>\n                    <selector-detail ng-repeat=\"item in $ctrl.selList\" sel=\"item\"></selector-detail>\n                </select>`,\n    controller: function SelectorController() {\n        const self = this\n\n        console.log(self.selValue)\n    },\n    bindings: {\n        selValue: '<',\n        selList: '=',\n        title: '=',\n    },\n})\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-top-headlines/filter-line/selector/selector.component.js?");
-
-/***/ }),
-
-/***/ "./src/app/news/news-top-headlines/filter-line/selector/selector.module.js":
-/*!*********************************************************************************!*\
-  !*** ./src/app/news/news-top-headlines/filter-line/selector/selector.module.js ***!
-  \*********************************************************************************/
-/***/ (() => {
-
-eval("angular.module('selector', [\n    \"selectorDetail\"\n])\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-top-headlines/filter-line/selector/selector.module.js?");
-
-/***/ }),
-
-/***/ "./src/app/news/news-top-headlines/filter-line/selector/selectorDetail/selector-detail.component.js":
-/*!**********************************************************************************************************!*\
-  !*** ./src/app/news/news-top-headlines/filter-line/selector/selectorDetail/selector-detail.component.js ***!
-  \**********************************************************************************************************/
-/***/ (() => {
-
-eval("angular.module('selectorDetail').component('selectorDetail', {\n    template: `<option value=\"$ctrl.sel.value\">{{$ctrl.sel.name}}</option>`,\n    controller: function SelectorDetailController() {\n\n    },\n    bindings: {\n        sel: '<',\n    }\n})\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-top-headlines/filter-line/selector/selectorDetail/selector-detail.component.js?");
-
-/***/ }),
-
-/***/ "./src/app/news/news-top-headlines/filter-line/selector/selectorDetail/selector-detail.module.js":
-/*!*******************************************************************************************************!*\
-  !*** ./src/app/news/news-top-headlines/filter-line/selector/selectorDetail/selector-detail.module.js ***!
-  \*******************************************************************************************************/
-/***/ (() => {
-
-eval("angular.module('selectorDetail', [\n\n])\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-top-headlines/filter-line/selector/selectorDetail/selector-detail.module.js?");
-
-/***/ }),
-
-/***/ "./src/app/news/news-top-headlines/news-top-headlines.component.js":
-/*!*************************************************************************!*\
-  !*** ./src/app/news/news-top-headlines/news-top-headlines.component.js ***!
-  \*************************************************************************/
-/***/ (() => {
-
-eval("angular.module('newsTopHeadlines').component('newsTopHeadlines', {\n    template: `<div>\n                    <div class=\"m-5 text-4xl\">Top Headlines</div>\n                    <filter-line on-click=\"$ctrl.clickFilter(orderCategory, orderCountry)\"></filter-line>\n                    <news-list news-list=\"$ctrl.news\" asd=\"123\"></news-list>\n                    <div ng-if=\"$ctrl.isPagination\">\n                        <pagination></pagination>\n                    </div>\n                </div>`,\n\n    controller: function NewsTopHeadlinesController(News) {\n        const self = this\n        this.isPagination = false\n\n        this.pageSize = 5\n\n        this.changeNews = function (body) {\n            News(\"top-headlines\", body).get(function (data) {\n                self.news = data[\"articles\"]\n                self.isPagination = true\n            })\n        }\n\n        this.changeNews({\n            country: \"us\",\n            pageSize: this.pageSize,\n        })\n\n\n        this.clickFilter = function (orderCategory, orderCountry) {\n            console.log(123)\n            if (!!!orderCountry && !!!orderCategory)\n                return\n\n            this.changeNews({\n                country: orderCountry ? orderCountry : \"\",\n                category: orderCategory ? orderCategory : \"\",\n                pageSize: this.pageSize,\n            })\n\n            if (this.news.length === 0)\n                this.isPagination = false\n\n        }\n    },\n})\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-top-headlines/news-top-headlines.component.js?");
-
-/***/ }),
-
-/***/ "./src/app/news/news-top-headlines/news-top-headlines.module.js":
-/*!**********************************************************************!*\
-  !*** ./src/app/news/news-top-headlines/news-top-headlines.module.js ***!
-  \**********************************************************************/
-/***/ (() => {
-
-eval("angular.module('newsTopHeadlines', [\n    'ngRoute',\n    'newsList',\n    'selector',\n    'pagination',\n    'core.news',\n    'filterLine'\n]);\n\n//# sourceURL=webpack://work-test-task/./src/app/news/news-top-headlines/news-top-headlines.module.js?");
-
-/***/ }),
-
-/***/ "./src/app/news/pagination/pagination.component.js":
-/*!*********************************************************!*\
-  !*** ./src/app/news/pagination/pagination.component.js ***!
-  \*********************************************************/
-/***/ (() => {
-
-eval("angular.module(\"pagination\").component(\"pagination\", {\n    template: `<div class=\"flex\">\n                    <pagination-detail ng-repeat=\"btn in $ctrl.array\" value=\"btn\"></pagination-detail>\n                </div>`,\n    controller: function PaginationController() {\n        this.array = [\"<<\", \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \">>\"]\n    },\n\n})\n\n//# sourceURL=webpack://work-test-task/./src/app/news/pagination/pagination.component.js?");
-
-/***/ }),
-
-/***/ "./src/app/news/pagination/pagination.module.js":
-/*!******************************************************!*\
-  !*** ./src/app/news/pagination/pagination.module.js ***!
-  \******************************************************/
-/***/ (() => {
-
-eval("angular.module('pagination', [\n    \"paginationDetail\"\n])\n\n//# sourceURL=webpack://work-test-task/./src/app/news/pagination/pagination.module.js?");
-
-/***/ }),
-
-/***/ "./src/app/news/pagination/paginationDetail/paginationDetail.component.js":
-/*!********************************************************************************!*\
-  !*** ./src/app/news/pagination/paginationDetail/paginationDetail.component.js ***!
-  \********************************************************************************/
-/***/ (() => {
-
-eval("angular.module(\"paginationDetail\").component(\"paginationDetail\", {\n    template: `<button ng-click=\"$ctrl.clickPage($event)\" class=\"p-2 bg-indigo-500 hover:bg-indigo-500/40 rounded-lg\">{{$ctrl.value}}</button>`,\n    controller: function PaginationDetailController() {\n        this.clickPage = function ($event) {\n            console.log($event.target.textContent)\n        }\n    },\n    bindings: {\n        value: \"<\",\n    },\n})\n\n//# sourceURL=webpack://work-test-task/./src/app/news/pagination/paginationDetail/paginationDetail.component.js?");
-
-/***/ }),
-
-/***/ "./src/app/news/pagination/paginationDetail/paginationDetail.module.js":
-/*!*****************************************************************************!*\
-  !*** ./src/app/news/pagination/paginationDetail/paginationDetail.module.js ***!
-  \*****************************************************************************/
-/***/ (() => {
-
-eval("angular.module(\"paginationDetail\", [\n\n])\n\n//# sourceURL=webpack://work-test-task/./src/app/news/pagination/paginationDetail/paginationDetail.module.js?");
-
-/***/ }),
-
 /***/ "./src/selectors-data/selectorsCategory.json":
 /*!***************************************************!*\
   !*** ./src/selectors-data/selectorsCategory.json ***!
@@ -410,7 +438,7 @@ eval("angular.module(\"paginationDetail\", [\n\n])\n\n//# sourceURL=webpack://wo
 /***/ ((module) => {
 
 "use strict";
-eval("module.exports = JSON.parse('[{\"name\":\"Business\",\"value\":\"business\"},{\"name\":\"Entertainment\",\"value\":\"entertainment\"}]');\n\n//# sourceURL=webpack://work-test-task/./src/selectors-data/selectorsCategory.json?");
+eval("module.exports = JSON.parse('[{\"name\":\"Business\",\"value\":\"business\"},{\"name\":\"Entertainment\",\"value\":\"entertainment\"},{\"name\":\"General\",\"value\":\"general\"},{\"name\":\"Health\",\"value\":\"health\"},{\"name\":\"Science\",\"value\":\"science\"},{\"name\":\"Sports\",\"value\":\"sports\"},{\"name\":\"Technology\",\"value\":\"technology\"}]');\n\n//# sourceURL=webpack://work-test-task/./src/selectors-data/selectorsCategory.json?");
 
 /***/ }),
 
@@ -421,7 +449,7 @@ eval("module.exports = JSON.parse('[{\"name\":\"Business\",\"value\":\"business\
 /***/ ((module) => {
 
 "use strict";
-eval("module.exports = JSON.parse('[{\"name\":\"USA\",\"value\":\"us\"},{\"name\":\"Russia\",\"value\":\"ru\"}]');\n\n//# sourceURL=webpack://work-test-task/./src/selectors-data/selectorsCountry.json?");
+eval("module.exports = JSON.parse('[{\"name\":\"USA\",\"value\":\"us\"},{\"name\":\"Russia\",\"value\":\"ru\"},{\"name\":\"Argentina\",\"value\":\"ar\"},{\"name\":\"Australia\",\"value\":\"au\"},{\"name\":\"Austria\",\"value\":\"at\"},{\"name\":\"Belgium\",\"value\":\"be\"},{\"name\":\"Brazil\",\"value\":\"br\"},{\"name\":\"Bulgaria\",\"value\":\"bg\"},{\"name\":\"Canada\",\"value\":\"ca\"},{\"name\":\"China\",\"value\":\"cn\"},{\"name\":\"Colombia\",\"value\":\"co\"},{\"name\":\"Cuba\",\"value\":\"cu\"},{\"name\":\"Czech Republic\",\"value\":\"cz\"},{\"name\":\"Egypt\",\"value\":\"eg\"},{\"name\":\"France\",\"value\":\"fr\"},{\"name\":\"Germany\",\"value\":\"de\"},{\"name\":\"Greece\",\"value\":\"gr\"},{\"name\":\"Hong Kong\",\"value\":\"hk\"},{\"name\":\"Hungary\",\"value\":\"hu\"},{\"name\":\"India\",\"value\":\"in\"},{\"name\":\"Indonesia\",\"value\":\"id\"},{\"name\":\"Ireland\",\"value\":\"ie\"},{\"name\":\"Israel\",\"value\":\"il\"},{\"name\":\"Italy\",\"value\":\"it\"},{\"name\":\"Japan\",\"value\":\"jp\"},{\"name\":\"Latvia\",\"value\":\"lv\"},{\"name\":\"Lithuania\",\"value\":\"lt\"},{\"name\":\"Malaysia\",\"value\":\"my\"},{\"name\":\"Mexico\",\"value\":\"mx\"},{\"name\":\"Morocco\",\"value\":\"ma\"},{\"name\":\"Netherlands\",\"value\":\"nl\"},{\"name\":\"New Zealand\",\"value\":\"nz\"},{\"name\":\"Nigeria\",\"value\":\"ng\"},{\"name\":\"Norway\",\"value\":\"no\"},{\"name\":\"Philippines\",\"value\":\"ph\"},{\"name\":\"Poland\",\"value\":\"pl\"},{\"name\":\"Portugal\",\"value\":\"pt\"},{\"name\":\"Romania\",\"value\":\"ro\"},{\"name\":\"Saudi Arabia\",\"value\":\"sa\"},{\"name\":\"Serbia\",\"value\":\"rs\"},{\"name\":\"Singapore\",\"value\":\"sg\"},{\"name\":\"Slovakia\",\"value\":\"sk\"},{\"name\":\"Slovenia\",\"value\":\"si\"},{\"name\":\"South Africa\",\"value\":\"za\"},{\"name\":\"South Korea\",\"value\":\"kr\"},{\"name\":\"Sweden\",\"value\":\"se\"},{\"name\":\"Switzerland\",\"value\":\"ch\"},{\"name\":\"Thailand\",\"value\":\"th\"},{\"name\":\"Turkey\",\"value\":\"tr\"},{\"name\":\"Taiwan\",\"value\":\"tw\"},{\"name\":\"Ukraine\",\"value\":\"ua\"},{\"name\":\"UAE\",\"value\":\"ae\"},{\"name\":\"United Kingdom\",\"value\":\"gb\"},{\"name\":\"Venezuela\",\"value\":\"ve\"}]');\n\n//# sourceURL=webpack://work-test-task/./src/selectors-data/selectorsCountry.json?");
 
 /***/ })
 
@@ -476,18 +504,6 @@ eval("module.exports = JSON.parse('[{\"name\":\"USA\",\"value\":\"us\"},{\"name\
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -504,26 +520,6 @@ eval("module.exports = JSON.parse('[{\"name\":\"USA\",\"value\":\"us\"},{\"name\
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/publicPath */
-/******/ 	(() => {
-/******/ 		var scriptUrl;
-/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
-/******/ 		var document = __webpack_require__.g.document;
-/******/ 		if (!scriptUrl && document) {
-/******/ 			if (document.currentScript)
-/******/ 				scriptUrl = document.currentScript.src;
-/******/ 			if (!scriptUrl) {
-/******/ 				var scripts = document.getElementsByTagName("script");
-/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
-/******/ 			}
-/******/ 		}
-/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
-/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
-/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
-/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
-/******/ 		__webpack_require__.p = scriptUrl;
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/nonce */
 /******/ 	(() => {
 /******/ 		__webpack_require__.nc = undefined;
@@ -534,7 +530,7 @@ eval("module.exports = JSON.parse('[{\"name\":\"USA\",\"value\":\"us\"},{\"name\
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/app/index.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/public/index.js");
 /******/ 	
 /******/ })()
 ;

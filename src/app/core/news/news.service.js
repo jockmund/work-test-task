@@ -6,14 +6,7 @@ angular
         const newsApi = new NewsApi()
 
         return function getNews(path, body) {
-            switch (path) {
-                case "everything":
-                    newsApi.changeFullUrl(path, body)
-                    break
-                case "top-headlines":
-                    newsApi.changeFullUrl(path, body)
-                    break
-            }
+            newsApi.changeFullUrl(path, body)
 
             return $resource(newsApi.fullUrl, {}, {
                 get: {

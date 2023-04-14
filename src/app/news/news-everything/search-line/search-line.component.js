@@ -6,6 +6,10 @@ angular.module("searchLine").component("searchLine", {
                 </div>`,
     controller: function SearchLineController() {
         this.query = ""
+
+        /**
+         * Вызываем событие родительского компонента для обновления новостей, передавая текущую строку с введенной новостью
+         */
         this.clickBtn = function () {
             if (!!!this.query)
                 return

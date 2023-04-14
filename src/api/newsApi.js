@@ -8,6 +8,11 @@ class NewsApi {
         this.fullUrl = ""
     }
 
+    /**
+     * Создаем опции для запроса на сервер, включая токен авторизации
+     * @param method - Метод
+     * @returns {{headers: {Authorization: string, accept: string}, method}}
+     */
     createOptions(method) {
         const options = {
             method,
@@ -20,11 +25,21 @@ class NewsApi {
         return options
     }
 
+    /**
+     * Генерируем полный url, на основе переданных параметров
+     * @param path - Тип страницы новостей, а именно everything или top-headlines
+     * @param body - Параметры запроса
+     */
     changeFullUrl(path, body) {
-        this.fullUrl = this.baseUrl + path + this.createFullPath(body)
+        this.fullUrl = this.baseUrl + path + this.createParamsPath(body)
     }
 
-    createFullPath(body) {
+    /**
+     * Генерируем часть url, содержащую параметры
+     * @param body - Параметры запроса
+     * @returns {string}
+     */
+    createParamsPath(body) {
         if (!body)
             return ""
 

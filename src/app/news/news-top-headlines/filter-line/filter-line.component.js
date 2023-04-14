@@ -8,6 +8,9 @@ angular.module("filterLine").component("filterLine", {
 
     controller: function FilterLineController($http) {
         const self = this
+        /**
+         * Инициализируем начальные значения, а именно список категорий и городов для select из json файлов
+         */
         this.$onInit = function () {
             const selCountry = require("../../../../selectors-data/selectorsCountry.json")
             const selCategory = require("../../../../selectors-data/selectorsCategory.json")
@@ -17,6 +20,9 @@ angular.module("filterLine").component("filterLine", {
             this.category = ""
         }
 
+        /**
+         * Вызываем событие родительского компонента для обновления новостей, передавая текущий выбранный город и категорию
+         */
         this.clickFilter = function () {
             if (!!!this.country && !!!this.category)
                 return
