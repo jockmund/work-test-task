@@ -14,7 +14,7 @@ angular.module("searchLine").component("searchLine", {
             if (!!!this.query)
                 return
 
-            this.onSearch({query: this.query})
+            this.onSearch({query: this.query.trim()})
         }
 
         this.pressEnter = function (event) {
