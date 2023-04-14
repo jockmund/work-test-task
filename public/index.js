@@ -9,12 +9,12 @@ require('../src/app/core/news/news.module')
 require('../src/app/core/news/news.service')
 
 // Модуль и компонент Одной кнопки в пагинации
-require('../src/app/news/pagination/pagination-detail/pagination-detail.module')
-require('../src/app/news/pagination/pagination-detail/pagination-detail.component')
+require('../src/app/pagination/pagination-detail/pagination-detail.module')
+require('../src/app/pagination/pagination-detail/pagination-detail.component')
 
 // Модуль и компонент Пагинации
-require('../src/app/news/pagination/pagination.module')
-require('../src/app/news/pagination/pagination.component')
+require('../src/app/pagination/pagination.module')
+require('../src/app/pagination/pagination.component')
 
 // Модуль и компонент Фотографии в новости
 require("../src/app/news/news-list/news-detail/news-image/news-image.module")
